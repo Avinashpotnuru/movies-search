@@ -15,9 +15,6 @@ const ImagesComponent = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  console.log("====================================");
-  console.log(id);
-  console.log("====================================");
   const { data } = useGetMovieImagesQuery({ id });
 
   return (
@@ -34,7 +31,7 @@ const ImagesComponent = () => {
                   key={idx}
                   height={700}
                   width={700}
-                  className=" h-[280px] w-[500px] "
+                  className=" h-auto w-[500px] "
                   src={`${
                     e?.file_path
                       ? `${imagePath}${e?.file_path}`

@@ -2,17 +2,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 //react imports
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGetSearchMoviesQuery } from "@/store/api/restApis";
 import { useDispatch, useSelector } from "react-redux";
 
 import { searchHandler } from "@/store/slice/tabsSlice";
+import { AiOutlineSearch } from "react-icons/ai";
 
 //import components
 import SearchTabComponent from "../SearchTabComponent";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const menuRef = useRef(null);
   const [searchInput, setInput] = useState("");
   const [searchResult, setSearchResult] = useState("");
   const [tabToggle, setToggle] = useState(false);
@@ -25,18 +27,33 @@ const Navbar = () => {
     setInput("");
   };
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setToggle(false);
+        setInput("");
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   const { data } = useGetSearchMoviesQuery({ searchInput });
   const searchData = data?.results;
 
   return (
-    <div className="bg-slate-600 h-[24vh] sm:h-[10vh] flex flex-col sm:flex sm:flex-row justify-around  items-center fixed top-0 w-full z-10  ">
-      <h1 className="text-3xl text-white font-extrabold italic">
+    <div className="bg-slate-600 py-2 h-[20vh] sm:h-[10vh] flex flex-col sm:flex sm:flex-row justify-around  items-center fixed top-0 w-full z-10  ">
+      <h1 className=" text-2xl sm:text-3xl text-white font-extrabold italic">
         <Link href={"/"}>Movies DB</Link>
       </h1>
       <div className="space-x-4 flex flex-col sm:flex-row items-center">
         <Link href={"/favorite"}>
           <h1
-            className={`ml-4 text-white font-bold ${
+            className={`ml-4 text-white font-bold mb-3 sm:mb-0 ${
               path === "/favorite" ? "underline pb-3" : ""
             } `}
           >
@@ -52,7 +69,7 @@ const Navbar = () => {
             Headlines
           </h1>
         </Link> */}
-        <div className="flex flex-col space-y-2 sm:space-y-0  justify-center items-center sm:flex-row">
+        <div className="flex space-x-2 sm:space-y-0  justify-center items-center sm:flex-row">
           <div className="relative flex">
             <input
               type="text"
@@ -61,11 +78,14 @@ const Navbar = () => {
                 setToggle(true);
               }}
               value={searchInput}
-              className="py-2 px-4 border border-gray-300 rounded-l-md focus:outline-none focus:ring focus:border-blue-300"
+              className="py-2 px-4 border border-gray-300  focus:outline-none focus:ring focus:border-blue-300"
               placeholder="Search Movie Name"
             />
             {tabToggle && (
-              <div className="bg-gray-800 absolute w-full h-[200px] overflow-hidden overflow-y-auto -bottom-48">
+              <div
+                ref={menuRef}
+                className="bg-gray-800    absolute w-full h-[200px] overflow-hidden overflow-y-auto -bottom-48"
+              >
                 {searchData.length ? (
                   searchData.map((e, idx) => (
                     <SearchTabComponent
@@ -83,11 +103,17 @@ const Navbar = () => {
             )}
           </div>
           <Link href={`/search-movies/${searchInput}`}>
-            <button
+            {/* <button
               onClick={submitHandler}
               className="bg-blue-500 text-white py-2 ml-2 px-4 rounded hover:bg-blue-600"
             >
               Search
+            </button> */}
+            <button
+              onClick={submitHandler}
+              className=" text-white border-2 font-semibold py-2 px-3 rounded-lg flex items-center"
+            >
+              <AiOutlineSearch size={20} />
             </button>
           </Link>
         </div>

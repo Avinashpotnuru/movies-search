@@ -23,7 +23,7 @@ const CastCard = ({
               <Image
                 height={500}
                 width={500}
-                className="w-full h-full mb-3 rounded-lg overflow-hidden shadow-lg  object-center"
+                className="w-full h-[120px] mb-3 rounded-lg overflow-hidden shadow-lg  object-center"
                 src={`${imagePath}${profile_path}`}
                 alt={`image${id}`}
               />

@@ -15,6 +15,7 @@ import {
   useGetSimilarMoviesQuery,
   useGetMovieVideosQuery,
   useGetPersonDetailsQuery,
+  useAddFavoritesMutation,
 } from "@/store/api/restApis";
 
 import Link from "next/link";
@@ -27,7 +28,11 @@ const VideoCard = dynamic(() => import("../VideoCard"), {
 });
 import SimilarMovieCard from "../SimilarMovieCard";
 
+import { MdOutlineFavorite } from "react-icons/md";
+import { useState } from "react";
+
 const MovieDetails = (props) => {
+  const [toggle, setToggle] = useState(false);
   const cast = props?.cast;
   const crew = props?.crew;
 
@@ -42,6 +47,7 @@ const MovieDetails = (props) => {
 
   const router = useRouter();
   const { id } = router.query;
+  const [addFavorite] = useAddFavoritesMutation();
 
   const { data } = useGetSimilarMoviesQuery({ id });
 
@@ -116,9 +122,24 @@ const MovieDetails = (props) => {
             </div>
           </div>
           <div className=" md:w-[50%] md:min-h-[80%] md:bg-purple-900  md:bg-clip-padding  md:backdrop-filter  md:backdrop-blur-sm  md:bg-opacity-50  text-blue-900 md:border md:border-gray-100 md:flex md:flex-col md:justify-around  px-4 space-y-2 md:space-y-0 p-3">
-            <h1 className="text-white text-2xl font-extrabold italic ">
-              {props?.title}
-            </h1>
+            <div className="flex justify-between items-center">
+              <h1 className="text-white text-2xl font-extrabold italic ">
+                {props?.title}
+              </h1>
+              <div
+                onClick={() => {
+                  setToggle((prev) => !prev);
+                  addFavorite({
+                    media_type: "movie",
+                    media_id: id,
+                    favorite: true,
+                  });
+                }}
+                className="mr-8"
+              >
+                <MdOutlineFavorite color={`${toggle ? "red" : "white"}`} />
+              </div>
+            </div>
             <div className="flex flex-wrap">
               <span className="text-white font-bold   text-base">Genres:</span>{" "}
               <div className="  font-semibold  text-green-500 flex flex-wrap ">

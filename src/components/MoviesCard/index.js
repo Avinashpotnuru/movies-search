@@ -7,7 +7,10 @@ import { useRouter } from "next/router";
 //react imports
 import { useEffect, useState } from "react";
 
-import { useAddFavoritesMutation } from "@/store/api/restApis";
+import {
+  useAddFavoritesMutation,
+  useGetFavoriteMoviesQuery,
+} from "@/store/api/restApis";
 
 import { imagePath } from "@/utilities";
 
@@ -25,7 +28,7 @@ function MoviesCard({
   addFav,
   delFav,
 }) {
-  const [toggle, setToggle] = useState("");
+  const [toggle, setToggle] = useState(false);
 
   const [addFavorite] = useAddFavoritesMutation();
 

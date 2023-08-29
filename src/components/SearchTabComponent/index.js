@@ -8,14 +8,17 @@ const SearchTabComponent = ({ title, poster_path, id, tabHandler }) => {
     <Link href={`/movies/${id}`}>
       <div
         onClick={() => tabHandler(false)}
-        className="w-full flex justify-between items-center bg-gray-700 py-2 px-3 min-h-10"
+        className="w-full  flex justify-between items-center bg-gray-700 py-2 px-3 min-h-10 border-t-[1px]"
       >
         <div className="w-[30%]">
           <Image
             height={500}
             width={500}
             className="h-[40px] w-[30px] overflow-hidden shadow-lg "
-            src={`${imagePath}${poster_path}`}
+            // src={`${imagePath}${poster_path}`}
+            src={`${
+              poster_path ? `${imagePath}${poster_path}` : "/noimage.png"
+            }`}
             alt="Bonnie image"
           />
         </div>
