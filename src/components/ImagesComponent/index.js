@@ -1,5 +1,3 @@
-"use client";
-
 //next imports
 import { useParams } from "next/navigation";
 import Image from "next/image";
@@ -9,10 +7,13 @@ import { imagePath } from "@/utilities";
 //import from store
 
 import { useGetMovieImagesQuery } from "@/store/api/restApis";
+import { useRouter } from "next/router";
 
 const ImagesComponent = () => {
-  const params = useParams();
-  const id = params.id;
+  // const params = useParams();
+  // const id = params.id;
+  const router = useRouter();
+  const { id } = router.query;
   const { data } = useGetMovieImagesQuery({ id });
 
   return (
