@@ -29,6 +29,7 @@ function MoviesCard({
   const [addFavorite] = useAddFavoritesMutation();
 
   const path = usePathname();
+
   useEffect(() => {}, [addFavorite]);
 
   return (
@@ -39,7 +40,7 @@ function MoviesCard({
             height={700}
             width={700}
             className="w-full h-full rounded-t"
-            src={`${imagePath}${poster_path}
+            src={`${`https://image.tmdb.org/t/p/w500/`}${poster_path}
         `}
             alt={`image${id}`}
           />
