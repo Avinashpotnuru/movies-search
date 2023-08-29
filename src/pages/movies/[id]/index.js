@@ -2,12 +2,14 @@
 
 import dynamic from "next/dynamic";
 import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 
 import {
   useGetMovieByIdQuery,
   useGetMovieDetailsCastQuery,
   useGetMovieVideosQuery,
 } from "@/store/api/restApis";
+// import MovieDetails from "@/components/MovieDetails";
 
 //import components
 const MovieDetails = dynamic(() => import("@/components/MovieDetails"), {
@@ -15,8 +17,11 @@ const MovieDetails = dynamic(() => import("@/components/MovieDetails"), {
 });
 
 const MoviesDetailsPage = () => {
-  const params = useParams();
-  const id = params.id;
+  // const params = useParams();
+  // const id = params.id;
+
+  const router = useRouter();
+  const { id } = router.query;
 
   const { data } = useGetMovieByIdQuery({ id });
   const { data: castData } = useGetMovieDetailsCastQuery({ id });

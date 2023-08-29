@@ -5,6 +5,8 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useParams } from "next/navigation";
 
+import { useRouter } from "next/router";
+
 //import third party packages
 import ReactPlayer from "react-player";
 
@@ -35,8 +37,11 @@ const MovieDetails = (props) => {
     key = props?.videos[0]?.key;
   }
 
-  const params = useParams();
-  const id = params.id;
+  // const params = useParams();
+  // const id = params.id;
+
+  const router = useRouter();
+  const { id } = router.query;
 
   const { data } = useGetSimilarMoviesQuery({ id });
 

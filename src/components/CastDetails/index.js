@@ -2,6 +2,7 @@
 
 //next imports
 import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 import Image from "next/image";
 
 import { imagePath } from "@/utilities";
@@ -23,10 +24,12 @@ import {
 } from "@/store/api/restApis";
 
 const CastDetails = () => {
-  const params = useParams();
   const [showDetails, setShowDetails] = useState(false);
+  // const params = useParams();
+  // const id = params.id;
 
-  const id = params.id;
+  const router = useRouter();
+  const { id } = router.query;
 
   const { data, isLoading } = useGetPersonDetailsQuery({ id });
 
