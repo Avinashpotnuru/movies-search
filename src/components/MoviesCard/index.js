@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 //react imports
 import { useEffect, useState } from "react";
 
@@ -37,7 +38,7 @@ function MoviesCard({
           <Image
             height={700}
             width={700}
-            className="w-full h-full  rounded-t"
+            className="w-full h-full rounded-t"
             src={`${imagePath}${poster_path}
         `}
             alt={`image${id}`}
