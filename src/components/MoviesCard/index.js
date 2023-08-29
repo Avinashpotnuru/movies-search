@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 
 import { useAddFavoritesMutation } from "@/store/api/restApis";
 
+import { imagePath } from "@/utilities";
+
 //third party packages
 import { RxCross2 } from "react-icons/rx";
 import { MdOutlineFavorite } from "react-icons/md";
@@ -21,9 +23,6 @@ function MoviesCard({
   addFav,
   delFav,
 }) {
-  const imagePath =
-    "https://image.tmdb.org/t/p/w500/https://image.tmdb.org/t/p/w500";
-
   const [toggle, setToggle] = useState("");
 
   const [addFavorite] = useAddFavoritesMutation();
