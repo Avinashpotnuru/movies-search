@@ -1,7 +1,5 @@
-"use client";
-
 //next imports
-import { useParams } from "next/navigation";
+
 import { useRouter } from "next/router";
 import Image from "next/image";
 
@@ -31,6 +29,8 @@ const CastDetails = () => {
   const router = useRouter();
   const { id } = router.query;
 
+  console.log("id", id);
+
   const { data, isLoading } = useGetPersonDetailsQuery({ id });
 
   const { data: imagesData } = useGetPersonImagesQuery({ id });
@@ -39,7 +39,7 @@ const CastDetails = () => {
 
   const images = imagesData?.profiles;
 
-  console.log("heroMovies", heroMovies?.cast);
+  // console.log("heroMovies", heroMovies?.cast);
 
   return (
     <div className=" flex-col justify-center items-center mx-auto h-screen w-full  ">

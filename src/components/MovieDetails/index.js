@@ -121,8 +121,8 @@ const MovieDetails = (props) => {
             </h1>
             <div className="flex flex-wrap">
               <span className="text-white font-bold   text-base">Genres:</span>{" "}
-              <div className="  font-semibold  text-green-500 flex-wrap text-base">
-                {props?.genres?.map((e) => e.name).join(",")}
+              <div className="  font-semibold  text-green-500 flex flex-wrap ">
+                {props?.genres?.map((e, idx) => e.name).join(",")}
               </div>
             </div>
 

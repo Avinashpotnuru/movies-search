@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 //next imports
 import Image from "next/image";
 import Link from "next/link";
@@ -36,11 +37,11 @@ function MoviesCard({
     <div className="bg-white min-h-[540px] shadow-md rounded m-3">
       <Link href={`/movies/${id}`}>
         <div className="h-3/4 w-full">
-          <Image
-            height={700}
-            width={700}
+          <img
+            // height={700}
+            // width={700}
             className="w-full h-full rounded-t"
-            src={`${`https://image.tmdb.org/t/p/w500/`}${poster_path}
+            src={`${imagePath}${poster_path}
         `}
             alt={`image${id}`}
           />

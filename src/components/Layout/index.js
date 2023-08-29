@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
   return (
     <div className=" overflow-y-auto h-screen  ">
       <Navbar />
-      <main>{children}</main>
+      <main className="pt-40 sm:pt-24">{children}</main>
     </div>
   );
 };

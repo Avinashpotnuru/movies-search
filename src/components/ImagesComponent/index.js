@@ -14,6 +14,10 @@ const ImagesComponent = () => {
   // const id = params.id;
   const router = useRouter();
   const { id } = router.query;
+
+  console.log("====================================");
+  console.log(id);
+  console.log("====================================");
   const { data } = useGetMovieImagesQuery({ id });
 
   return (
