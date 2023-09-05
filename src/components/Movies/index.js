@@ -86,7 +86,7 @@ const Movies = () => {
         {title}
       </h1>
 
-      <div className="flex justify-center items-center w-full  ">
+      <div className="flex justify-center items-center w-full sm:px-5  ">
         {isLoading ? (
           <ProgressBar
             height="80"
@@ -98,7 +98,7 @@ const Movies = () => {
             barColor="#51E5FF"
           />
         ) : (
-          <div className="grid grid-cols-1 gap-y-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  w-full  md:gap-5 my-7">
+          <div className=" grid grid-cols-1 gap-y-3 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4  w-full  md:gap-5 my-7">
             {moviesData?.map((val, idx) => (
               <MoviesCard
                 path={path}

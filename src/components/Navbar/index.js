@@ -47,7 +47,7 @@ const Navbar = () => {
 
   return (
     <div className="bg-slate-600 py-2 h-[20vh] sm:h-[10vh] flex flex-col sm:flex sm:flex-row justify-around  items-center fixed top-0 w-full z-10  ">
-      <h1 className=" text-2xl sm:text-3xl text-white font-extrabold italic">
+      <h1 className=" text-2xl sm:text-3xl text-white font-bold italic">
         <Link href={"/"}>Movies DB</Link>
       </h1>
       <div className="space-x-4 flex flex-col sm:flex-row items-center">

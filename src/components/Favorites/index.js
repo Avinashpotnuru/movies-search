@@ -1,6 +1,6 @@
 "use client";
 //hooks
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 //next imports
 import { usePathname } from "next/navigation";
@@ -12,14 +12,22 @@ import MoviesCard from "../MoviesCard";
 import { useGetFavoriteMoviesQuery } from "@/store/api/restApis";
 
 const Favorites = () => {
+  const componentEle = useRef();
+
+  // console.log(componentEle.current);
   const path = usePathname();
 
   const { data } = useGetFavoriteMoviesQuery();
 
+  console.log(data);
+
   const delFav = (e) => {};
 
   return (
-    <div className="flex flex-col justify-start items-center h-screen">
+    <div
+      ref={componentEle}
+      className="flex flex-col justify-start items-center h-screen"
+    >
       <h1 className="text-4xl text-white font-extrabold mb-3 ">
         Favorites Movies
       </h1>
