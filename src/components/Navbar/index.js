@@ -26,6 +26,8 @@ const Navbar = () => {
   const [searchInput, setInput] = useState("");
   const [searchResult, setSearchResult] = useState("");
   const [tabToggle, setToggle] = useState(false);
+
+  const [dropDownCard, setDropDownCard] = useState(false);
   const path = usePathname();
 
   const submitHandler = () => {
@@ -68,24 +70,39 @@ const Navbar = () => {
           {!open ? <AiOutlineMenu /> : <AiOutlineClose />}
         </div>
 
-        <div className=" md:flex  w-[60%] justify-evenly items-center hidden">
+        <div className=" md:flex   w-[70%] justify-evenly items-center hidden">
           <div className="space-x-4 flex flex-col sm:flex-row items-center order-2 sm:order-1">
+            <div className="relative">
+              <h1
+                onClick={() => setDropDownCard((prev) => !prev)}
+                className={`ml-4 text-white font-bold mb-3 sm:mb-0  `}
+              >
+                Categories
+              </h1>
+              {dropDownCard && (
+                <div className="bg-white w-[500px] rounded-lg absolute top-12 p-4 hidden  md:grid grid-cols-3 gap-5 ">
+                  {moviesList?.genres?.map((item, idx) => (
+                    <Link
+                      onClick={() => {
+                        setOpen(false);
+                        setDropDownCard(false);
+                      }}
+                      href={`/category/${item?.id}`}
+                      key={idx}
+                    >
+                      {item?.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
             <Link href={"/favorite"}>
               <h1
                 className={`ml-4 text-white font-bold mb-3 sm:mb-0 ${
-                  path === "/favorite" ? "underline pb-3" : ""
+                  path === "/favorite" ? "underline" : ""
                 } `}
               >
                 Favorite
-              </h1>
-            </Link>
-            <Link href={"/top-headlines"}>
-              <h1
-                className={`ml-4  ${
-                  path === "/top-headlines" ? "font-bold text-white" : ""
-                }`}
-              >
-                Categories
               </h1>
             </Link>
           </div>
@@ -138,7 +155,7 @@ const Navbar = () => {
           open ? "top-16 " : "top-[-490px]"
         }`}
       >
-        <div className="overflow-y-auto min-h-[50vh]  ">
+        <div className="overflow-y-auto min-h-[30vh]  ">
           <div className="flex  w-full py-4 ">
             <div className="relative flex justify-between items-center  w-full ">
               <input

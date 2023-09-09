@@ -66,6 +66,10 @@ const restApi = createApi({
     getGenres: builder.query({
       query: (data) => `genre/movie/list`,
     }),
+    getGenresMovies: builder.query({
+      query: (data) =>
+        `discover/movie?include_adult=false&include_video=false&language=en-US&page=${data.pageId}&sort_by=popularity.desc&with_genres=${data.id}`,
+    }),
   }),
 });
 
@@ -84,6 +88,7 @@ export const {
   useGetFavoriteMoviesQuery,
   useGetHeroMoviesQuery,
   useGetGenresQuery,
+  useGetGenresMoviesQuery,
 } = restApi;
 
 export default restApi;
