@@ -63,6 +63,9 @@ const restApi = createApi({
     getFavoriteMovies: builder.query({
       query: (data) => `account/20236627/favorite/movies`,
     }),
+    getGenres: builder.query({
+      query: (data) => `genre/movie/list`,
+    }),
   }),
 });
 
@@ -80,6 +83,7 @@ export const {
   useGetMovieImagesQuery,
   useGetFavoriteMoviesQuery,
   useGetHeroMoviesQuery,
+  useGetGenresQuery,
 } = restApi;
 
 export default restApi;

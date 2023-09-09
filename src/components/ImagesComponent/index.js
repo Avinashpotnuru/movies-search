@@ -10,8 +10,6 @@ import { useGetMovieImagesQuery } from "@/store/api/restApis";
 import { useRouter } from "next/router";
 
 const ImagesComponent = () => {
-  // const params = useParams();
-  // const id = params.id;
   const router = useRouter();
   const { id } = router.query;
 
