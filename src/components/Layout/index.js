@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
     <div className="  h-screen w-full  ">
       <Navbar />
 
-      <main className="pt-[200px] sm:pt-24 md:pt-40   ">{children}</main>
+      <main className="  pt-[100px]  ">{children}</main>
     </div>
   );
 };

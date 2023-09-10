@@ -44,8 +44,10 @@ function MoviesCard({
             // height={700}
             // width={700}
             className="w-full h-full rounded-t"
-            src={`${imagePath}${poster_path}
-        `}
+            // src={`${imagePath}${poster_path}`}
+            src={`${
+              poster_path ? `${imagePath}${poster_path}` : "/noimage.png"
+            }`}
             alt={`image${id}`}
           />
         </div>
@@ -59,30 +61,31 @@ function MoviesCard({
             </span>
           </h1>
 
-          {path === "/" && (
-            <div
-              className=""
-              onClick={() => {
-                addFav(id);
-                setToggle(id);
-                addFavorite({
-                  media_type: "movie",
-                  media_id: id,
-                  favorite: true,
-                });
-              }}
-            >
-              {id === toggle ? (
-                <MdOutlineFavorite size={20} className="text-red-500 " />
-              ) : (
-                <MdOutlineFavorite
-                  onClick={() => delFav(id)}
-                  size={20}
-                  className=""
-                />
-              )}
-            </div>
-          )}
+          {path === "/" ||
+            (path === "/special" && (
+              <div
+                className=""
+                onClick={() => {
+                  addFav(id);
+                  setToggle(id);
+                  addFavorite({
+                    media_type: "movie",
+                    media_id: id,
+                    favorite: true,
+                  });
+                }}
+              >
+                {id === toggle ? (
+                  <MdOutlineFavorite size={20} className="text-red-500 " />
+                ) : (
+                  <MdOutlineFavorite
+                    onClick={() => delFav(id)}
+                    size={20}
+                    className=""
+                  />
+                )}
+              </div>
+            ))}
 
           {path === "/favorite" && (
             <div

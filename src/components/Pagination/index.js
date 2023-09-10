@@ -8,7 +8,7 @@ const Pagination = ({ pages }) => {
   const dispatch = useDispatch();
   const [selectedNumber, setSelectedNumber] = useState(1);
   const [staticPagenumber, setStaticPagenumber] = useState(1);
-  console.log(selectedNumber);
+  // console.log(selectedNumber);
 
   const pageHandler = (pageNumber) => {
     setStaticPagenumber(pageNumber);

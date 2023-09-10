@@ -65,7 +65,7 @@ const MovieDetails = (props) => {
   return (
     <div className="w-full sm:pt-12 md:pt-0  ">
       <div
-        className={`w-full ${
+        className={`w-full  ${
           props.backdrop_path && "md:bg-purple-400"
         }    rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10   h-auto  md:h-[70vh] lg:h-[90vh] flex justify-center items-center  relative   `}
       >

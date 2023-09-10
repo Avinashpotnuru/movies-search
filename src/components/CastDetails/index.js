@@ -29,7 +29,7 @@ const CastDetails = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  console.log("id", id);
+  // console.log("id", id);
 
   const { data, isLoading } = useGetPersonDetailsQuery({ id });
 

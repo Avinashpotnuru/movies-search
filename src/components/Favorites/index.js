@@ -19,7 +19,7 @@ const Favorites = () => {
 
   const { data } = useGetFavoriteMoviesQuery();
 
-  console.log(data);
+  // console.log(data);
 
   const delFav = (e) => {};
 

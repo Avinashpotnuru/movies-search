@@ -70,6 +70,10 @@ const restApi = createApi({
       query: (data) =>
         `discover/movie?include_adult=false&include_video=false&language=en-US&page=${data.pageId}&sort_by=popularity.desc&with_genres=${data.id}`,
     }),
+    getSpecialMovies: builder.query({
+      query: (data) =>
+        `discover/movie?include_adult=false&include_video=false&language=en-US&page=${data.pageId}&sort_by=popularity.desc&with_origin_country=IN&with_original_language=${data.code}`,
+    }),
   }),
 });
 
@@ -89,6 +93,7 @@ export const {
   useGetHeroMoviesQuery,
   useGetGenresQuery,
   useGetGenresMoviesQuery,
+  useGetSpecialMoviesQuery,
 } = restApi;
 
 export default restApi;
