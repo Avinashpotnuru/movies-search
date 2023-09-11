@@ -38,9 +38,9 @@ function MoviesCard({
   useEffect(() => {}, [addFavorite]);
 
   return (
-    <div className="bg-white h-[540px] lg:h-[400px]  shadow-md rounded m-3  transition duration-700 ease-in-out hover:scale-105">
+    <div className="bg-white h-[540px] lg:h-[430px]  shadow-md rounded m-3  transition duration-700 ease-in-out hover:scale-105">
       <Link href={`/movies/${id}`}>
-        <div className="h-[75%] lg:h-[65%] w-full relative">
+        <div className="h-[75%] lg:h-[70%] w-full relative">
           <img
             className="w-full h-full rounded-t hover:border-[6px] hover:border-white  transition duration-700 ease-in-out"
             src={`${
@@ -48,13 +48,13 @@ function MoviesCard({
             }`}
             alt={`image${id}`}
           />
-          <div className="h-[40px] w-[40px] absolute font-bold hover:text-green-400 bg-white top-4 right-4 rounded-full flex justify-center items-center hover:scale-125 transition duration-700 ease-in-out ">
+          <div className="h-[40px] w-[30px] absolute font-bold hover:text-green-400 bg-white top-4 right-4 rounded-full flex justify-center items-center hover:scale-125 transition duration-700 ease-in-out ">
             {vote_average}
           </div>
         </div>
       </Link>
 
-      <div className="w-full h-[25%] lg:h-[35%] p-3">
+      <div className="w-full h-[25%] lg:h-[35%]  px-2 py-3">
         <div className="flex justify-between  items-center w-full">
           <h1 className=" hover:text-yellow-600 text-gray-700">
             <span className="text-base font-semibold uppercase tracking-wide ">
@@ -117,7 +117,7 @@ function MoviesCard({
         <p className="text-gray-600 text-sm leading-5 mt-1">
           {/* Rating :
           <span className="text-red-500 font-bold">{vote_average}/10</span> */}
-          {`${overview.slice(0, 100)}....`}
+          {`${overview.slice(0, 80)}....`}
         </p>
       </div>
     </div>

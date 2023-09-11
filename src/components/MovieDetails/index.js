@@ -30,6 +30,7 @@ import SimilarMovieCard from "../SimilarMovieCard";
 
 import { MdOutlineFavorite } from "react-icons/md";
 import { useState } from "react";
+import { AiOutlineRight } from "react-icons/ai";
 
 const MovieDetails = (props) => {
   const [toggle, setToggle] = useState(false);
@@ -42,16 +43,15 @@ const MovieDetails = (props) => {
     key = props?.videos[0]?.key;
   }
 
-  // const params = useParams();
-  // const id = params.id;
-
   const router = useRouter();
+
   const { id } = router.query;
+
   const [addFavorite] = useAddFavoritesMutation();
 
   const { data } = useGetSimilarMoviesQuery({ id });
 
-  const { data: reviews } = useGetPersonDetailsQuery();
+  // const { data: reviews } = useGetPersonDetailsQuery({ id });
 
   const similarMovies = data?.results;
 
@@ -65,9 +65,9 @@ const MovieDetails = (props) => {
   return (
     <div className="w-full sm:pt-12 md:pt-0  ">
       <div
-        className={`w-full  ${
-          props.backdrop_path && "md:bg-purple-400"
-        }    rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10   h-auto  md:h-[70vh] lg:h-[90vh] flex justify-center items-center  relative   `}
+        className={`w-full md:h-[60vh]  lg:h-[80vh]   ${
+          props.backdrop_path && ""
+        }    rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10    flex justify-center items-center  relative   `}
       >
         <Image
           src={`${
@@ -76,12 +76,12 @@ const MovieDetails = (props) => {
               : "/backgroundImage.jpg"
           }`}
           height={100}
-          width={1000}
-          className="w-full h-full hidden md:block object-center absolute -z-10  "
+          width={100}
+          className="w-full h-full hidden md:block object-cover opacity-40 absolute -z-10  "
           alt="image"
         />
-        <div className="sm:w-[90%] lg:w-[80%] md:h-[60%]   flex flex-col md:flex-row md:justify-around  sm:items-center space-y-4 md:space-y-0  ">
-          <div className="md:w-[50%] md:h-full  flex justify-center items-center">
+        <div className=" flex flex-col md:flex-row md:justify-around  sm:items-center space-y-4 md:space-y-0  w-full px-4 md:px-10 lg:px-24 xl:px-40 ">
+          <div className="flex justify-center items-center ">
             <Image
               height={300}
               width={400}
@@ -90,7 +90,7 @@ const MovieDetails = (props) => {
                   ? `${imagePath}${props.poster_path}`
                   : "/noimage.png"
               }`}
-              className="w-[300px] h-[320px]  md:h-full md:w-auto sm:hidden"
+              className="w-[300px] h-[380px]  md:h-full md:w-auto sm:hidden"
               alt="image"
             />
             <div className="hidden w-full sm:block">
@@ -104,7 +104,7 @@ const MovieDetails = (props) => {
                       height={300}
                       width={400}
                       src={`${imagePath}${props.poster_path}`}
-                      className="w-[300px] h-[340px] md:h-[400px] mb-6"
+                      className="w-[300px] h-[380px] md:h-[400px] mb-6"
                       alt="image"
                     />
                   }
@@ -121,7 +121,7 @@ const MovieDetails = (props) => {
               )}
             </div>
           </div>
-          <div className=" md:w-[50%] md:min-h-[80%] md:bg-purple-900  md:bg-clip-padding  md:backdrop-filter  md:backdrop-blur-sm  md:bg-opacity-50  text-blue-900 md:border md:border-gray-100 md:flex md:flex-col md:justify-around  px-4 space-y-2 md:space-y-0 p-3">
+          <div className="  text-blue-900 md:border md:border-gray-100 md:flex md:flex-col md:justify-around  px-4 space-y-2 md:space-y-0 p-3">
             <div className="flex justify-between items-center">
               <h1 className="text-white text-2xl font-extrabold italic ">
                 {props?.title}
@@ -169,29 +169,18 @@ const MovieDetails = (props) => {
                 </span>{" "}
                 {props?.release_date}
               </h1>
-              <h1 className="text-green-500 font-bold">
+              <h1 className=" font-bold text-white ">
                 <span className=" text-white font-bold text-base">Rating</span>{" "}
                 : {props?.vote_average}
               </h1>
             </div>
             <div className="flex justify-end items-center my-4">
               <Link href={`/images/${id}`}>
-                <button class="bg-transparent text-white py-2 px-4 rounded-md flex items-center space-x-2 transition duration-300 ease-in-out hover:border-2">
+                <button className="bg-transparent flex justify-center items-center text-white py-2 px-4 rounded-md  space-x-2 transition duration-300 ease-in-out hover:border-2">
                   More Images
-                  <svg
-                    class="w-4 h-4 transform transition-transform duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5l7 7-7 7"
-                    ></path>
-                  </svg>
+                  <div className="ml-2 my-auto">
+                    <AiOutlineRight />
+                  </div>
                 </button>
               </Link>
             </div>

@@ -24,7 +24,9 @@ const MoviesDetailsPage = () => {
   const { id } = router.query;
 
   const { data } = useGetMovieByIdQuery({ id });
+
   const { data: castData } = useGetMovieDetailsCastQuery({ id });
+
   const { data: movieVideos } = useGetMovieVideosQuery({ id });
 
   const trailer = movieVideos?.results?.filter((e) => e.type == "Trailer");
