@@ -7,6 +7,7 @@ import {
   useGetSearchMoviesQuery,
   useGetGenresQuery,
 } from "@/store/api/restApis";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import { searchHandler } from "@/store/slice/tabsSlice";
@@ -28,9 +29,13 @@ export const specials = [
 const Navbar = () => {
   const dispatch = useDispatch();
   const menuRef = useRef(null);
+
+  const dropDownCardRef = useRef(null);
+
   let [open, setOpen] = useState(false);
 
   const [dropDown, setDropDown] = useState(false);
+
   const [splDropDown, setSplDropDown] = useState(false);
 
   const [searchInput, setInput] = useState("");
@@ -52,7 +57,13 @@ const Navbar = () => {
     function handleClickOutside(event) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setToggle(false);
+
         setInput("");
+      } else if (
+        dropDownCardRef.current &&
+        !dropDownCardRef.current.contains(event.target)
+      ) {
+        setDropDownCard(false);
       }
     }
 
@@ -87,12 +98,12 @@ const Navbar = () => {
           )}
         </div>
 
-        <div className=" md:flex   w-[70%] justify-evenly items-center hidden">
+        <div className=" md:flex   w-[75%] justify-evenly items-center hidden">
           <div className="space-x-4 flex flex-col sm:flex-row items-center order-2 sm:order-1">
             <div className="relative">
               <h1
                 onClick={() => {
-                  setDropDownCard(true);
+                  setDropDownCard((prev) => !prev);
                   setSplDropDownCard(false);
                 }}
                 className={`ml-4 text-white font-bold mb-3 sm:mb-0  `}
@@ -100,9 +111,14 @@ const Navbar = () => {
                 Categories
               </h1>
               {dropDownCard && (
-                <div className="bg-white w-[500px] rounded-lg absolute top-12 p-4 hidden  md:grid grid-cols-3 gap-5 ">
+                <div
+                  // ref={dropDownCardRef}
+                  // onClick={() => setDropDownCard()}
+                  className="bg-white w-[500px] rounded-lg absolute top-12 p-4 hidden  md:grid grid-cols-3 gap-5 "
+                >
                   {moviesList?.genres?.map((item, idx) => (
                     <Link
+                      className="hover:bg-slate-100"
                       onClick={() => {
                         setOpen(false);
                         setDropDownCard(false);
@@ -121,7 +137,7 @@ const Navbar = () => {
               <h1
                 onClick={() => {
                   setDropDownCard(false);
-                  setSplDropDownCard(true);
+                  setSplDropDownCard((prev) => !prev);
                 }}
                 className={`ml-4 text-white font-bold mb-3 sm:mb-0  `}
               >
@@ -131,6 +147,7 @@ const Navbar = () => {
                 <div className="bg-white w-[190px]  rounded-lg absolute top-12 p-4 hidden  md:grid grid-cols-1 gap-3 ">
                   {specials.map((item, idx) => (
                     <Link
+                      className="hover:bg-slate-100"
                       onClick={() => {
                         setOpen(false);
                         setSplDropDownCard(false);
@@ -147,6 +164,10 @@ const Navbar = () => {
 
             <Link href={"/favorite"}>
               <h1
+                onClick={() => {
+                  setDropDownCard(false);
+                  setSplDropDownCard(false);
+                }}
                 className={`ml-4 text-white font-bold mb-3 sm:mb-0 ${
                   path === "/favorite" ? "underline" : ""
                 } `}
@@ -159,13 +180,13 @@ const Navbar = () => {
             <div className="relative flex">
               <input
                 type="text"
+                placeholder="Search Movie Name"
                 onChange={(e) => {
                   setInput(e.target.value);
                   setToggle(true);
                 }}
                 value={searchInput}
                 className="py-2 px-4 border border-gray-300  focus:outline-none focus:ring focus:border-blue-300"
-                placeholder="Search Movie Name"
               />
               {tabToggle && (
                 <div
@@ -312,7 +333,7 @@ const Navbar = () => {
                     setOpen(false);
                     setSplDropDown(false);
                   }}
-                  href={`/special/${item?.page}/${item?.c}`}
+                  href={`/special/${item?.page}`}
                   key={idx}
                 >
                   {item?.name}

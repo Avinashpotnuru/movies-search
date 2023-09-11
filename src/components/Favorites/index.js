@@ -33,7 +33,7 @@ const Favorites = () => {
       </h1>
 
       {data?.results.length ? (
-        <div className="grid grid-cols-1 gap-y-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  w-full  md:gap-5 my-7">
+        <div className="grid grid-cols-1 gap-y-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5  w-full  md:gap-5 my-7">
           {data?.results.map((val, idx) => (
             <MoviesCard
               addFav={() => {}}

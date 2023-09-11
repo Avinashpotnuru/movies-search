@@ -49,7 +49,7 @@ const Specials = () => {
             barColor="#51E5FF"
           />
         ) : (
-          <div className=" grid grid-cols-1 gap-y-3 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4  w-full  md:gap-5 my-7">
+          <div className=" grid grid-cols-1 gap-y-3 sm:grid-cols-2   lg:grid-cols-4 xl:grid-cols-5   w-full  md:gap-5 my-7">
             {data?.results?.map((val, idx) => (
               <MoviesCard path={path} key={idx} {...val} />
             ))}
