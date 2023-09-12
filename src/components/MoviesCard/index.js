@@ -48,7 +48,7 @@ function MoviesCard({
             }`}
             alt={`image${id}`}
           />
-          <div className="h-[40px] w-[30px] absolute font-bold hover:text-green-400 bg-white top-4 right-4 rounded-full flex justify-center items-center hover:scale-125 transition duration-700 ease-in-out ">
+          <div className="h-[40px] w-[40px] absolute font-bold hover:text-green-400 bg-white top-4 right-4 rounded-full flex justify-center items-center hover:scale-125 transition duration-700 ease-in-out ">
             {vote_average}
           </div>
         </div>

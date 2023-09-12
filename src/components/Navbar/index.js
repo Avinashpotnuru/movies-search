@@ -17,6 +17,7 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 
 //import components
 import SearchTabComponent from "../SearchTabComponent";
+import Image from "next/image";
 
 export const specials = [
   { name: "Hindi movies", page: "hindi", code: "hi" },
@@ -82,9 +83,19 @@ const Navbar = () => {
   return (
     <div className=" bg-slate-600 w-full fixed z-30 ">
       <div className=" bg-slate-600 px-5 py-4 flex justify-between items-center fixed top-0 left-0 right-0 w-full z-30  ">
-        <h1 className=" text-2xl sm:text-3xl text-white font-bold italic">
+        {/* <h1 className=" text-2xl sm:text-3xl text-white font-bold italic">
           <Link href={"/"}>Movies Zone </Link>
-        </h1>
+        </h1> */}
+
+        <Link href={"/"}>
+          <Image
+            height={100}
+            width={100}
+            className="h-[60px] w-[60px] rounded-full"
+            src="/movieszone.png"
+            alt="logo"
+          />
+        </Link>
         <div
           onClick={() => {
             setOpen(!open);

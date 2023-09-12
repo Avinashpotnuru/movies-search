@@ -80,7 +80,7 @@ const MovieDetails = (props) => {
           className="w-full h-full hidden md:block object-cover opacity-40 absolute -z-10  "
           alt="image"
         />
-        <div className=" flex flex-col md:flex-row md:justify-around  sm:items-center space-y-4 md:space-y-0  w-full px-4 md:px-10 lg:px-24 xl:px-40 ">
+        <div className=" flex flex-col md:flex-row md:justify-around  sm:items-center space-y-4 md:space-y-0  w-full px-4 md:px-5 lg:px-24 xl:px-40 ">
           <div className="flex justify-center items-center ">
             <Image
               height={300}
@@ -90,12 +90,13 @@ const MovieDetails = (props) => {
                   ? `${imagePath}${props.poster_path}`
                   : "/noimage.png"
               }`}
-              className="w-[300px] h-[380px]  md:h-full md:w-auto sm:hidden"
+              className="w-[300px] h-[380px]  md:h-full  sm:hidden"
               alt="image"
             />
-            <div className="hidden w-full sm:block">
+            <div className="hidden w-full sm:flex md:w-1/2 md:flex justify-center items-center ">
               {key ? (
                 <ReactPlayer
+                  // style={{ height: "50%", width: "200px" }}
                   controls={true}
                   height={300}
                   width={400}
@@ -104,7 +105,7 @@ const MovieDetails = (props) => {
                       height={300}
                       width={400}
                       src={`${imagePath}${props.poster_path}`}
-                      className="w-[300px] h-[380px] md:h-[400px] mb-6"
+                      className="w-[300px] h-[380px]  md:h-full mb-6 "
                       alt="image"
                     />
                   }
@@ -115,13 +116,13 @@ const MovieDetails = (props) => {
                   height={300}
                   width={400}
                   src={`${imagePath}${props.poster_path}`}
-                  className="w-[300px] h-[340px] mb-6 "
+                  className="w-[300px] h-auto sm:w-[350px] mb-6 "
                   alt="image"
                 />
               )}
             </div>
           </div>
-          <div className="  text-blue-900 md:border md:border-gray-100 md:flex md:flex-col md:justify-around  px-4 space-y-2 md:space-y-0 p-3">
+          <div className="  text-blue-900 md:border md:border-gray-100 md:flex md:flex-col md:justify-around  px-4 space-y-2 md:space-y-0 p-3 md:w-1/2">
             <div className="flex justify-between items-center">
               <h1 className="text-white text-2xl font-extrabold italic ">
                 {props?.title}

@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
         <title>Movies-Search </title>
         <link
           rel="icon"
-          href="/movielogo.jpg"
+          href="/moviesZoneLogo.png"
           type="image/x-icon"
           sizes="any"
         />
