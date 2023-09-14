@@ -23,6 +23,10 @@ const Favorites = () => {
 
   const delFav = (e) => {};
 
+  // useEffect(() => {
+  //   window.location.reload();
+  // }, []);
+
   return (
     <div
       ref={componentEle}

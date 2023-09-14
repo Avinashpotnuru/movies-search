@@ -62,31 +62,30 @@ function MoviesCard({
             </span>
           </h1>
 
-          {path === "/" ||
-            (path === "/special" && (
-              <div
-                className=""
-                onClick={() => {
-                  addFav(id);
-                  setToggle(id);
-                  addFavorite({
-                    media_type: "movie",
-                    media_id: id,
-                    favorite: true,
-                  });
-                }}
-              >
-                {id === toggle ? (
-                  <MdOutlineFavorite size={20} className="text-red-500 " />
-                ) : (
-                  <MdOutlineFavorite
-                    onClick={() => delFav(id)}
-                    size={20}
-                    className=""
-                  />
-                )}
-              </div>
-            ))}
+          {path === "/" && (
+            <div
+              className=""
+              onClick={() => {
+                addFav(id);
+                setToggle(id);
+                addFavorite({
+                  media_type: "movie",
+                  media_id: id,
+                  favorite: true,
+                });
+              }}
+            >
+              {id === toggle ? (
+                <MdOutlineFavorite size={20} className="text-red-500 " />
+              ) : (
+                <MdOutlineFavorite
+                  onClick={() => delFav(id)}
+                  size={20}
+                  className=""
+                />
+              )}
+            </div>
+          )}
 
           {path === "/favorite" && (
             <div
@@ -97,9 +96,9 @@ function MoviesCard({
                   media_id: id,
                   favorite: false,
                 });
-                setTimeout(() => {
-                  window.location.reload();
-                }, 10);
+                // setTimeout(() => {
+                //   window.location.reload();
+                // }, 100);
               }}
             >
               <RxCross2 />

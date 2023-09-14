@@ -29,6 +29,7 @@ export const specials = [
 
 const Navbar = () => {
   const dispatch = useDispatch();
+
   const menuRef = useRef(null);
 
   const dropDownCardRef = useRef(null);
@@ -56,11 +57,14 @@ const Navbar = () => {
 
   useEffect(() => {
     function handleClickOutside(event) {
+      console.log(event);
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setToggle(false);
 
         setInput("");
-      } else if (
+      }
+
+      if (
         dropDownCardRef.current &&
         !dropDownCardRef.current.contains(event.target)
       ) {
@@ -72,6 +76,28 @@ const Navbar = () => {
 
     return () => {
       document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  console.log(dropDownCardRef.current);
+  console.log(menuRef.current);
+
+  useEffect(() => {
+    function handleDropClickOutside(event) {
+      console.log(event);
+
+      if (
+        dropDownCardRef.current &&
+        !dropDownCardRef.current.contains(event.target)
+      ) {
+        setDropDownCard(false);
+      }
+    }
+
+    document.addEventListener("click", handleDropClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleDropClickOutside);
     };
   }, []);
 
@@ -129,6 +155,7 @@ const Navbar = () => {
                 >
                   {moviesList?.genres?.map((item, idx) => (
                     <Link
+                      // ref={dropDownCardRef}
                       className="hover:bg-slate-100"
                       onClick={() => {
                         setOpen(false);
