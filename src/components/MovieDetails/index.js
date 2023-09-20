@@ -67,7 +67,7 @@ const MovieDetails = (props) => {
       <div
         className={`w-full md:h-[60vh]  lg:h-[80vh]   ${
           props.backdrop_path && ""
-        }    rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10    flex justify-center items-center  relative   `}
+        }    rounded-md    flex justify-center items-center  relative   `}
       >
         <div className="opacity-layer1 h-[20px] lg:h-[100px]"></div>
         <Image
@@ -78,7 +78,7 @@ const MovieDetails = (props) => {
           }`}
           height={100}
           width={100}
-          className="w-full h-full hidden md:block object-cover opacity-40 absolute -z-10  "
+          className="w-full h-full hidden md:block object-cover opacity-[0.5] absolute -z-10  "
           alt="image"
         />
         <div className=" flex flex-col md:flex-row md:justify-around  sm:items-center space-y-4 md:space-y-0  w-full px-4 md:px-5 lg:px-24 xl:px-40 ">
@@ -151,8 +151,10 @@ const MovieDetails = (props) => {
               </div>
             </div>
             <div className="flex flex-wrap">
-              <span className="text-white font-bold   text-base">Genres:</span>{" "}
-              <div className="  font-semibold  text-green-500 flex flex-wrap ">
+              <span className="text-white font-bold   text-base">
+                Genres :{" "}
+              </span>{" "}
+              <div className="  font-semibold  text-green-500 flex flex-wrap ml-1">
                 {props?.genres?.map((e, idx) => e.name).join(",")}
               </div>
             </div>

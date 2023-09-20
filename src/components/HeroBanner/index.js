@@ -33,8 +33,8 @@ const HeroBanner = ({ pageId }) => {
         <Image
           className="h-full w-full object-cover  top-0 left-0 opacity-[0.5]   absolute  "
           src={`${imagePath}${backGroundImg}`}
-          height={1000}
-          width={1000}
+          height={500}
+          width={500}
           alt=""
         />
       )}
