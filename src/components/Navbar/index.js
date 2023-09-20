@@ -10,7 +10,7 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { searchHandler } from "@/store/slice/tabsSlice";
+import { searchHandler, searchInputHandler } from "@/store/slice/tabsSlice";
 import { AiOutlineSearch, AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
@@ -40,28 +40,33 @@ const Navbar = () => {
 
   const [splDropDown, setSplDropDown] = useState(false);
 
-  const [searchInput, setInput] = useState("");
+  // const [searchInput, setInput] = useState("");
   const [searchResult, setSearchResult] = useState("");
   const [tabToggle, setToggle] = useState(false);
   const [dropDownCard, setDropDownCard] = useState(false);
   const [splDropDownCard, setSplDropDownCard] = useState(false);
   const path = usePathname();
 
+  const searchInput = useSelector((state) => state.tabsSlice.searchInput);
+
+  // console.log(searchInput);
+
   const submitHandler = () => {
     setSearchResult(searchInput);
     dispatch(searchHandler(searchInput));
     setOpen(false);
     setToggle(false);
-    setInput("");
+    // setInput("");
+    dispatch(searchInputHandler(""));
   };
 
   useEffect(() => {
     function handleClickOutside(event) {
-      console.log(event);
+      // console.log(event);
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setToggle(false);
-
-        setInput("");
+        // setInput("");
+        dispatch(searchInputHandler(""));
       }
 
       if (
@@ -79,12 +84,12 @@ const Navbar = () => {
     };
   }, []);
 
-  console.log(dropDownCardRef.current);
-  console.log(menuRef.current);
+  // console.log(dropDownCardRef.current);
+  // console.log(menuRef.current);
 
   useEffect(() => {
     function handleDropClickOutside(event) {
-      console.log(event);
+      // console.log(event);
 
       if (
         dropDownCardRef.current &&
@@ -100,6 +105,10 @@ const Navbar = () => {
       document.removeEventListener("click", handleDropClickOutside);
     };
   }, []);
+
+  const clearInput = () => {
+    // setInput("");
+  };
 
   const { data } = useGetSearchMoviesQuery({ searchInput });
   const searchData = data?.results;
@@ -117,7 +126,7 @@ const Navbar = () => {
           <Image
             height={100}
             width={100}
-            className="h-[60px] w-[60px] rounded-full"
+            className="h-[50px] w-[50px] rounded-full"
             src="/movieszone.png"
             alt="logo"
           />
@@ -220,8 +229,9 @@ const Navbar = () => {
                 type="text"
                 placeholder="Search Movie Name"
                 onChange={(e) => {
-                  setInput(e.target.value);
+                  // setInput(e.target.value);
                   setToggle(true);
+                  dispatch(searchInputHandler(e.target.value));
                 }}
                 value={searchInput}
                 className="py-2 px-4 border border-gray-300  focus:outline-none focus:ring focus:border-blue-300"
@@ -269,8 +279,9 @@ const Navbar = () => {
               <input
                 type="text"
                 onChange={(e) => {
-                  setInput(e.target.value);
+                  // setInput(e.target.value);
                   setToggle(true);
+                  dispatch(searchInputHandler(e.target.value));
                 }}
                 value={searchInput}
                 className="py-2 w-[70%]  border border-gray-300  focus:outline-none focus:ring focus:border-blue-300"
@@ -293,6 +304,7 @@ const Navbar = () => {
                     searchData.map((e, idx) => (
                       <SearchTabComponent
                         tabHandler={() => setToggle()}
+                        clearInput={clearInput}
                         key={idx}
                         {...e}
                       />
@@ -309,8 +321,9 @@ const Navbar = () => {
 
           <Link href={"/favorite"}>
             <h1
+              onClick={() => setOpen(false)}
               className={`ml-4 text-white font-bold mb-3 sm:mb-0 ${
-                path === "/favorite" ? "underline pb-3" : ""
+                path === "/favorite" ? "" : ""
               } `}
             >
               Favorite

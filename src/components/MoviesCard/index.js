@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 //react imports
 import { useEffect, useState } from "react";
 
+import CircleRating from "../CircleRating";
+
 import {
   useAddFavoritesMutation,
   useGetFavoriteMoviesQuery,
@@ -29,6 +31,10 @@ function MoviesCard({
   delFav,
   overview,
 }) {
+  const rate = Math.floor(vote_average);
+
+  // console.log(rate);
+
   const [toggle, setToggle] = useState(false);
 
   const [addFavorite] = useAddFavoritesMutation();
@@ -38,18 +44,20 @@ function MoviesCard({
   useEffect(() => {}, [addFavorite]);
 
   return (
-    <div className="bg-white h-[540px] lg:h-[430px]  shadow-md rounded m-3  transition duration-700 ease-in-out hover:scale-105">
+    <div className="bg-white h-[540px] w-[310px] md:h-[500px] mx-auto sm:mx-0 sm:w-auto lg:h-[430px]  shadow-md rounded m-3  transition duration-700 ease-in-out hover:scale-105">
       <Link href={`/movies/${id}`}>
         <div className="h-[75%] lg:h-[70%] w-full relative">
           <img
-            className="w-full h-full rounded-t hover:border-[6px] hover:border-white  transition duration-700 ease-in-out"
+            className="w-full h-full  rounded-t hover:border-[6px] hover:border-white  transition duration-700 ease-in-out"
             src={`${
               poster_path ? `${imagePath}${poster_path}` : "/noimage.png"
             }`}
             alt={`image${id}`}
           />
-          <div className="h-[40px] w-[40px] absolute font-bold hover:text-green-400 bg-white top-4 right-4 rounded-full flex justify-center items-center hover:scale-125 transition duration-700 ease-in-out ">
-            {vote_average}
+          <div className="h-[50px] w-[50px] absolute font-bold hover:text-green-400 bg-white top-4 right-4 rounded-full flex justify-center items-center hover:scale-125 transition duration-700 ease-in-out ">
+            {/* {Math.floor(vote_average)} */}
+            {/* {vote_average.toFixed(1)} */}
+            <CircleRating rating={vote_average.toFixed(1)} />
           </div>
         </div>
       </Link>
@@ -62,11 +70,11 @@ function MoviesCard({
             </span>
           </h1>
 
-          {path === "/" && (
+          {path !== "/favorite" && (
             <div
               className=""
               onClick={() => {
-                addFav(id);
+                // addFav(id);
                 setToggle(id);
                 addFavorite({
                   media_type: "movie",
@@ -79,7 +87,7 @@ function MoviesCard({
                 <MdOutlineFavorite size={20} className="text-red-500 " />
               ) : (
                 <MdOutlineFavorite
-                  onClick={() => delFav(id)}
+                  // onClick={() => delFav(id)}
                   size={20}
                   className=""
                 />

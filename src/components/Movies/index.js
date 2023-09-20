@@ -13,18 +13,21 @@ import { useGetMoviesQuery } from "@/store/api/restApis";
 
 import MoviesCard from "../MoviesCard";
 import Pagination from "../Pagination";
+import HeroBanner from "../HeroBanner";
+
+export const tabs = [
+  { title: "Now Playing", tab: "now_playing" },
+  { title: "Popular", tab: "popular" },
+  { title: "Top Rated", tab: "top_rated" },
+  { title: "Up Coming", tab: "upcoming" },
+];
 
 const Movies = () => {
   const path = usePathname();
   const [tab, setTab] = useState("now_playing");
   const [title, setTitle] = useState("Now Playing");
   const [favorite, setFavorite] = useState([]);
-  const tabs = [
-    { title: "Now Playing", tab: "now_playing" },
-    { title: "Popular", tab: "popular" },
-    { title: "Top Rated", tab: "top_rated" },
-    { title: "Up Coming", tab: "upcoming" },
-  ];
+
   const handleDropdownChange = (event) => {
     setTab(event.target.value);
     setTitle(event.target.value2);
@@ -53,7 +56,10 @@ const Movies = () => {
 
   return (
     <div className="flex flex-col justify-center items-center space-y-7 min-h-screen w-full   ">
-      <h1 className="text-4xl text-white font-extrabold mb-3 ">Movies</h1>
+      <HeroBanner pageId={pageId} />
+      <h1 className="text-2xl sm:text-4xl text-white font-semibold mb-3 ">
+        Movies
+      </h1>
       <div className="space-x-3  hidden   sm:flex justify-around items-center  flex-wrap">
         {tabs.map((val, idx) => (
           <button
@@ -98,7 +104,7 @@ const Movies = () => {
             barColor="#51E5FF"
           />
         ) : (
-          <div className=" grid grid-cols-1 gap-y-3 sm:grid-cols-2  lg:grid-cols-4 xl:grid-cols-5  w-full  md:gap-4 my-7">
+          <div className=" grid grid-cols-1 gap-y-3 sm:grid-cols-2  sm:gap-3 lg:grid-cols-4 xl:grid-cols-5  w-full  md:gap-4 my-7">
             {moviesData?.map((val, idx) => (
               <MoviesCard
                 path={path}

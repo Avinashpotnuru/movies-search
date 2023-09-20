@@ -8,6 +8,8 @@ import { MdOutlineFavorite } from "react-icons/md";
 
 import { useAddFavoritesMutation } from "@/store/api/restApis";
 
+import CircleRating from "../CircleRating";
+
 const SearchMovieCard = ({
   poster_path,
   id,
@@ -39,7 +41,7 @@ const SearchMovieCard = ({
           </Link>
         </div>
 
-        <div className="flex-col text-gray-300 w-full ">
+        <div className="flex-col text-gray-300 w-full px-4  ">
           <div className="flex justify-between items-center w-full">
             <p className="pt-4 text-2xl font-bold">
               {title} ({release_date.slice(0, 4)})
@@ -61,11 +63,12 @@ const SearchMovieCard = ({
 
           <hr className="hr-text w-full" data-content="" />
 
-          <p className=" px-4 my-4 text-sm text-left">{overview}</p>
-
-          <p className="flex text-md px-4 my-2">
-            Rating:{parseFloat(vote_average).toFixed(2)}/10
-          </p>
+          <p className="  my-4 text-sm text-left">{overview}</p>
+          <div className="w-full  flex justify-end items-center">
+            <div className="h-[60px] w-[60px] ml-8  ">
+              <CircleRating rating={vote_average.toFixed(1)} />
+            </div>
+          </div>
         </div>
       </div>
     </div>

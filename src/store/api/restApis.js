@@ -93,6 +93,10 @@ const restApi = createApi({
         `discover/movie?include_adult=false&include_video=false&language=en-US&page=${data.pageId}&sort_by=popularity.desc&with_origin_country=IN&with_original_language=${data.code}`,
       providesTags: ["Movies"],
     }),
+    getUpComingMovies: builder.query({
+      query: (data) => `movie/upcoming`,
+      providesTags: ["Movies"],
+    }),
   }),
 });
 
@@ -113,6 +117,7 @@ export const {
   useGetGenresQuery,
   useGetGenresMoviesQuery,
   useGetSpecialMoviesQuery,
+  useGetUpComingMoviesQuery,
 } = restApi;
 
 export default restApi;

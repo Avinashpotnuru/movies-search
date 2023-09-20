@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Movies-Search </title>
+        <title>Movies-Zone</title>
         <link
           rel="icon"
           href="/moviesZoneLogo.png"

@@ -69,6 +69,7 @@ const MovieDetails = (props) => {
           props.backdrop_path && ""
         }    rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10    flex justify-center items-center  relative   `}
       >
+        <div className="opacity-layer1 h-[20px] lg:h-[100px]"></div>
         <Image
           src={`${
             props.backdrop_path
@@ -104,7 +105,11 @@ const MovieDetails = (props) => {
                     <Image
                       height={300}
                       width={400}
-                      src={`${imagePath}${props.poster_path}`}
+                      src={`${
+                        props.poster_path
+                          ? `${imagePath}${props.poster_path}`
+                          : "/noimage.png"
+                      }`}
                       className="w-[300px] h-[380px]  md:h-full mb-6 "
                       alt="image"
                     />
@@ -115,7 +120,11 @@ const MovieDetails = (props) => {
                 <Image
                   height={300}
                   width={400}
-                  src={`${imagePath}${props.poster_path}`}
+                  src={`${
+                    props.poster_path
+                      ? `${imagePath}${props.poster_path}`
+                      : "/noimage.png"
+                  }`}
                   className="w-[300px] h-auto sm:w-[350px] mb-6 "
                   alt="image"
                 />

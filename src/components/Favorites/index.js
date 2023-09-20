@@ -32,7 +32,7 @@ const Favorites = () => {
       ref={componentEle}
       className="flex flex-col justify-start items-center h-screen"
     >
-      <h1 className="text-4xl text-white font-extrabold mb-3 ">
+      <h1 className=" text-2xl sm:text-4xl text-white font-bold mb-3 ">
         Favorites Movies
       </h1>
 
