@@ -10,7 +10,12 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { searchHandler, searchInputHandler } from "@/store/slice/tabsSlice";
+import {
+  searchHandler,
+  searchInputHandler,
+  openNav,
+  closeNav,
+} from "@/store/slice/tabsSlice";
 import { AiOutlineSearch, AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
@@ -49,15 +54,19 @@ const Navbar = () => {
 
   const searchInput = useSelector((state) => state.tabsSlice.searchInput);
 
+  // const open = useSelector((state) => state.tabsSlice.navToggle);
+
   // console.log(searchInput);
 
   const submitHandler = () => {
-    setSearchResult(searchInput);
-    dispatch(searchHandler(searchInput));
-    setOpen(false);
-    setToggle(false);
-    // setInput("");
-    dispatch(searchInputHandler(""));
+    if (searchInput) {
+      setSearchResult(searchInput);
+      dispatch(searchHandler(searchInput));
+      setOpen(false);
+      setToggle(false);
+      // setInput("");
+      dispatch(searchInputHandler(""));
+    }
   };
 
   useEffect(() => {
@@ -118,10 +127,6 @@ const Navbar = () => {
   return (
     <div className=" bg-slate-600 w-full fixed z-30 ">
       <div className=" bg-slate-600 px-5 py-4 flex justify-between items-center fixed top-0 left-0 right-0 w-full z-30  ">
-        {/* <h1 className=" text-2xl sm:text-3xl text-white font-bold italic">
-          <Link href={"/"}>Movies Zone </Link>
-        </h1> */}
-
         <Link href={"/"}>
           <Image
             height={100}

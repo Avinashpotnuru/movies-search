@@ -39,6 +39,13 @@ const restApi = createApi({
       query: (data) => `movie/${data.id}`,
       providesTags: ["Movies"],
     }),
+
+    getMovieFullDetailsById: builder.query({
+      query: (data) =>
+        `movie/${data.id}?append_to_response=credits,similar,videos`,
+      providesTags: ["Movies"],
+    }),
+
     getMovieDetailsCast: builder.query({
       query: (data) => `movie/${data.id}/credits`,
       providesTags: ["Movies"],
@@ -118,6 +125,7 @@ export const {
   useGetGenresMoviesQuery,
   useGetSpecialMoviesQuery,
   useGetUpComingMoviesQuery,
+  useGetMovieFullDetailsByIdQuery,
 } = restApi;
 
 export default restApi;

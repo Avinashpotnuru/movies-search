@@ -1,7 +1,12 @@
 //redux imports
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { tabs: "1", searchResult: "", searchInput: "" };
+const initialState = {
+  tabs: "1",
+  searchResult: "",
+  searchInput: "",
+  navToggle: false,
+};
 
 const tabsSlice = createSlice({
   name: "tabs",
@@ -22,6 +27,13 @@ const tabsSlice = createSlice({
     clearSearchHandler: (state, action) => {
       state.searchInput = "";
     },
+
+    openNav: (state, action) => {
+      state.navToggle = true;
+    },
+    closeNav: (state, action) => {
+      state.navToggle = false;
+    },
   },
 });
 
@@ -30,6 +42,8 @@ export const {
   searchHandler,
   clearSearchHandler,
   searchInputHandler,
+  closeNav,
+  openNav,
 } = tabsSlice.actions;
 
 export default tabsSlice.reducer;

@@ -10,6 +10,10 @@ import MoviesCard from "../MoviesCard";
 import { ProgressBar } from "react-loader-spinner";
 import Pagination from "../Pagination";
 import { useSelector } from "react-redux";
+import HeadBanner from "../HeadBanner";
+
+import { GrHomeRounded } from "react-icons/gr";
+import Link from "next/link";
 
 const Genres = () => {
   const router = useRouter();
@@ -21,17 +25,30 @@ const Genres = () => {
   const pageId = useSelector((state) => state.tabsSlice.tabs);
   const { isLoading, data } = useGetGenresMoviesQuery({ id, pageId });
 
-  // console.log(data);
+  console.log(data);
 
   const genresArray = moviesGenres?.genres;
 
   const getGenreName = genresArray?.find((item) => item.id == id);
 
+  const randomMovieIndex = Math.floor(Math.random() * data?.results.length);
+
+  const randomMovieData = data?.results[randomMovieIndex];
+
   return (
-    <div className=" flex flex-col justify-center items-center px-5 py-6">
-      <h1 className="text-white text-3xl font-semibold">
+    <div className=" flex flex-col justify-center items-center px-5 py-6 relative">
+      <Link href="/">
+        {" "}
+        <div className="absolute top-7 left-7 h-[30px] w-[30px] md:h-[50px] md:w-[50px] bg-white hover:bg-slate-300 flex justify-center items-center">
+          <GrHomeRounded />
+        </div>
+      </Link>
+
+      <h1 className="text-white text-3xl font-semibold mb-8">
         {getGenreName?.name}
       </h1>
+
+      {randomMovieData && <HeadBanner {...randomMovieData} />}
 
       <div className="flex justify-center items-center w-full sm:px-5  ">
         {isLoading ? (
