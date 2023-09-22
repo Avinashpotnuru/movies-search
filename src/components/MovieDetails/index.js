@@ -36,7 +36,7 @@ import { imagePath } from "@/utilities";
 import CircleRating from "../CircleRating";
 import { GrHomeRounded } from "react-icons/gr";
 
-const MovieDetails = (props) => {
+const MovieDetails = () => {
   const [toggle, setToggle] = useState(false);
 
   const router = useRouter();
@@ -84,7 +84,7 @@ const MovieDetails = (props) => {
       />
     </div>
   ) : (
-    <div className="w-full sm:pt-16 md:pt-0 relative  ">
+    <div className="w-full pt-16  md:pt-0 relative ">
       <Link href="/">
         {" "}
         <div className="absolute top-7 left-7  z-10 h-[30px] w-[30px] md:h-[50px] md:w-[50px] bg-white hover:bg-slate-300 flex justify-center items-center">
@@ -159,10 +159,10 @@ const MovieDetails = (props) => {
             <div>
               <h1 className="text-white text-base">{data?.overview}</h1>
             </div>
-            <div className="flex flex-wrap space-x-2 my-5">
+            <div className="flex flex-wrap space-x-2  my-5">
               {data?.genres?.map((item, idx) => (
                 <button
-                  className=" text-black font-semibold px-2 bg-gradient-to-r from-teal-200 to-teal-500"
+                  className=" text-black font-semibold mb-2 px-2 bg-gradient-to-r from-teal-200 to-teal-500"
                   key={idx}
                 >
                   {item.name}
@@ -193,16 +193,16 @@ const MovieDetails = (props) => {
               </div>
             </div>
 
-            <div className="flex justify-between items-center my-4 ">
+            <div className="flex flex-col justify-center sm:flex-row sm:justify-between space-y-4 sm:space-y-0 items-center my-4 ">
               <Link href={`/images/${id}`}>
-                <button className="bg-transparent flex justify-center items-center text-white py-2 px-4 rounded-md  space-x-2 transition duration-300 ease-in-out border-2 hover:border-green-400 hover:text-green-500 ">
+                <button className="bg-transparent flex justify-center items-center  text-white py-2 px-4 rounded-md  space-x-2 transition duration-300 ease-in-out border-2 hover:border-green-400 hover:text-green-500 ">
                   More Images
                   <div className="ml-2 my-auto ">
                     <AiOutlineRight />
                   </div>
                 </button>
               </Link>
-              {trailer.length && (
+              {trailer.length > 0 && (
                 <a
                   href={`https://www.youtube.com/watch?v=${key}`}
                   target="_blank"
@@ -250,26 +250,35 @@ const MovieDetails = (props) => {
           </>
         )}
 
-        <h1 className="font-bold text-white my-3 text-2xl  text-center">
-          Cast
-        </h1>
-        <div className="flex flex-col  overflow-x-auto w-full  p-3">
-          <div className="flex  space-x-4 pt-4 ">
-            {cast?.map((e, idx) => (
-              <CastCard key={idx} {...e} />
-            ))}
-          </div>
-        </div>
-        <h1 className=" font-bold text-white my-3 text-2xl  text-center">
-          Crew
-        </h1>
-        <div className="flex flex-col  overflow-x-auto w-full p-3">
-          <div className="flex  space-x-4  ">
-            {crew?.map((e, idx) => (
-              <CastCard crew_name={"crew"} key={idx} {...e} />
-            ))}
-          </div>
-        </div>
+        {cast?.length > 0 && (
+          <>
+            <h1 className="font-bold text-white my-3 text-2xl  text-center">
+              Cast
+            </h1>
+            <div className="flex flex-col  overflow-x-auto w-full  p-3">
+              <div className="flex  space-x-4 pt-4 ">
+                {cast?.map((e, idx) => (
+                  <CastCard key={idx} {...e} />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+
+        {crew?.length > 0 && (
+          <>
+            <h1 className=" font-bold text-white my-3 text-2xl  text-center">
+              Crew
+            </h1>
+            <div className="flex flex-col  overflow-x-auto w-full p-3">
+              <div className="flex  space-x-4  ">
+                {crew?.map((e, idx) => (
+                  <CastCard crew_name={"crew"} key={idx} {...e} />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

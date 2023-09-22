@@ -25,7 +25,7 @@ const Genres = () => {
   const pageId = useSelector((state) => state.tabsSlice.tabs);
   const { isLoading, data } = useGetGenresMoviesQuery({ id, pageId });
 
-  console.log(data);
+  // console.log(data);
 
   const genresArray = moviesGenres?.genres;
 

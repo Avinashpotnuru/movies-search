@@ -39,8 +39,6 @@ const Navbar = () => {
 
   const dropDownCardRef = useRef(null);
 
-  let [open, setOpen] = useState(false);
-
   const [dropDown, setDropDown] = useState(false);
 
   const [splDropDown, setSplDropDown] = useState(false);
@@ -54,19 +52,18 @@ const Navbar = () => {
 
   const searchInput = useSelector((state) => state.tabsSlice.searchInput);
 
-  // const open = useSelector((state) => state.tabsSlice.navToggle);
+  const open = useSelector((state) => state.tabsSlice.navToggle);
 
   // console.log(searchInput);
 
   const submitHandler = () => {
-    if (searchInput) {
-      setSearchResult(searchInput);
-      dispatch(searchHandler(searchInput));
-      setOpen(false);
-      setToggle(false);
-      // setInput("");
-      dispatch(searchInputHandler(""));
-    }
+    setSearchResult(searchInput);
+    dispatch(searchHandler(searchInput));
+
+    dispatch(closeNav());
+    setToggle(false);
+    // setInput("");
+    dispatch(searchInputHandler(""));
   };
 
   useEffect(() => {
@@ -120,6 +117,7 @@ const Navbar = () => {
   };
 
   const { data } = useGetSearchMoviesQuery({ searchInput });
+
   const searchData = data?.results;
 
   const { data: moviesList } = useGetGenresQuery();
@@ -136,16 +134,16 @@ const Navbar = () => {
             alt="logo"
           />
         </Link>
-        <div
-          onClick={() => {
-            setOpen(!open);
-          }}
-          className="md:hidden transition-all duration-500 "
-        >
+        <div className="md:hidden transition-all  duration-500 ">
           {!open ? (
-            <AiOutlineMenu />
+            <AiOutlineMenu onClick={() => dispatch(openNav())} />
           ) : (
-            <AiOutlineClose onClick={() => setDropDown(false)} />
+            <AiOutlineClose
+              onClick={() => {
+                setDropDown(false);
+                dispatch(closeNav(false));
+              }}
+            />
           )}
         </div>
 
@@ -172,7 +170,8 @@ const Navbar = () => {
                       // ref={dropDownCardRef}
                       className="hover:bg-slate-100"
                       onClick={() => {
-                        setOpen(false);
+                        // setOpen(false);
+                        dispatch(closeNav());
                         setDropDownCard(false);
                       }}
                       href={`/category/${item?.id}`}
@@ -201,7 +200,7 @@ const Navbar = () => {
                     <Link
                       className="hover:bg-slate-100"
                       onClick={() => {
-                        setOpen(false);
+                        dispatch(closeNav());
                         setSplDropDownCard(false);
                       }}
                       href={`/special/${item?.page}`}
@@ -232,7 +231,7 @@ const Navbar = () => {
             <div className="relative flex">
               <input
                 type="text"
-                placeholder="Search Movie Name"
+                placeholder={"Search Movie Name"}
                 onChange={(e) => {
                   // setInput(e.target.value);
                   setToggle(true);
@@ -274,7 +273,7 @@ const Navbar = () => {
         </div>
       </div>
       <div
-        className={` w-full   flex flex-col md:items-center bg-slate-600 md:pb-0 py-8 md:hidden absolute md:static   md:z-auto left-0  md:w-auto md:pl-0  transition-all duration-500 z-20 ease-in ${
+        className={` w-full   flex flex-col md:items-center bg-slate-600  md:pb-0 py-8 md:hidden absolute md:static   md:z-auto left-0  md:w-auto md:pl-0  transition-all duration-500 z-20 ease-in ${
           open ? "top-16 " : "top-[-490px]"
         }`}
       >
@@ -326,7 +325,9 @@ const Navbar = () => {
 
           <Link href={"/favorite"}>
             <h1
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                dispatch(closeNav());
+              }}
               className={`ml-4 text-white font-bold mb-3 sm:mb-0 ${
                 path === "/favorite" ? "" : ""
               } `}
@@ -354,7 +355,7 @@ const Navbar = () => {
                 <Link
                   className="w-full mx-auto px-5 py-2 text-white font-semibold"
                   onClick={() => {
-                    setOpen(false);
+                    dispatch(closeNav());
                     setDropDown(false);
                   }}
                   href={`/category/${item?.id}`}
@@ -386,7 +387,7 @@ const Navbar = () => {
                 <Link
                   className="w-full mx-auto px-5 py-2 text-white font-semibold"
                   onClick={() => {
-                    setOpen(false);
+                    dispatch(closeNav());
                     setSplDropDown(false);
                   }}
                   href={`/special/${item?.page}`}

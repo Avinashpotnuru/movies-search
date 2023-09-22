@@ -2,9 +2,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { searchInputHandler } from "@/store/slice/tabsSlice";
+import { searchInputHandler, closeNav } from "@/store/slice/tabsSlice";
 
 import { useDispatch } from "react-redux";
+
+import { imagePath } from "@/utilities";
 const SearchTabComponent = ({
   title,
   poster_path,
@@ -14,15 +16,15 @@ const SearchTabComponent = ({
 }) => {
   const dispatch = useDispatch();
 
-  console.log(clearInput);
-  const imagePath =
-    "https://image.tmdb.org/t/p/w500/https://image.tmdb.org/t/p/w500";
+  // console.log(clearInput);
+
   return (
     <Link href={`/movies/${id}`}>
       <div
         onClick={() => {
           tabHandler(false);
           dispatch(searchInputHandler(""));
+          dispatch(closeNav());
         }}
         className="w-full  flex justify-between items-center bg-gray-700 py-2 px-3 min-h-10 border-t-[1px]"
       >

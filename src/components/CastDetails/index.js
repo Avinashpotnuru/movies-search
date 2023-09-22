@@ -25,13 +25,9 @@ import { GrHomeRounded } from "react-icons/gr";
 
 const CastDetails = () => {
   const [showDetails, setShowDetails] = useState(false);
-  // const params = useParams();
-  // const id = params.id;
 
   const router = useRouter();
   const { id } = router.query;
-
-  // console.log("id", id);
 
   const { data, isLoading } = useGetPersonDetailsQuery({ id });
 
@@ -40,8 +36,6 @@ const CastDetails = () => {
   const { data: heroMovies } = useGetHeroMoviesQuery({ id });
 
   const images = imagesData?.profiles;
-
-  // console.log("heroMovies", heroMovies?.cast);
 
   return (
     <div className=" flex-col justify-center items-center mx-auto h-screen w-full relative  ">

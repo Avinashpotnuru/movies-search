@@ -44,19 +44,17 @@ function MoviesCard({
   useEffect(() => {}, [addFavorite]);
 
   return (
-    <div className="bg-white h-[540px] w-[310px] md:h-[500px] mx-auto sm:mx-0 sm:w-auto lg:h-[430px]  shadow-md rounded m-3  transition duration-700 ease-in-out hover:scale-105">
+    <div className="bg-white h-[540px] w-[310px] md:h-auto mx-auto sm:mx-0 sm:w-auto lg:h-[430px]  shadow-md rounded m-3  transition duration-700 ease-in-out  overflow-hidden">
       <Link href={`/movies/${id}`}>
-        <div className="h-[75%] lg:h-[70%] w-full relative">
+        <div className="h-[75%] lg:h-[70%] w-full relative overflow-hidden">
           <img
-            className="w-full h-full  rounded-t hover:border-[6px] hover:border-white  transition duration-700 ease-in-out"
+            className="w-full h-full  rounded-t hover:border-[6px] hover:border-white  transition duration-700 ease-in-out hover:scale-110"
             src={`${
               poster_path ? `${imagePath}${poster_path}` : "/noimage.png"
             }`}
             alt={`image${id}`}
           />
           <div className="h-[50px] w-[50px] absolute font-bold hover:text-green-400 bg-white top-4 right-4 rounded-full flex justify-center items-center hover:scale-125 transition duration-700 ease-in-out ">
-            {/* {Math.floor(vote_average)} */}
-            {/* {vote_average.toFixed(1)} */}
             <CircleRating rating={vote_average.toFixed(1)} />
           </div>
         </div>
@@ -104,9 +102,6 @@ function MoviesCard({
                   media_id: id,
                   favorite: false,
                 });
-                // setTimeout(() => {
-                //   window.location.reload();
-                // }, 100);
               }}
             >
               <RxCross2 />
@@ -114,17 +109,12 @@ function MoviesCard({
           )}
         </div>
 
-        {/* <p className="text-gray-600 text-sm leading-5 mt-1">
-          Release-date:{release_date}
-        </p>
-        <p className="text-gray-600 text-sm leading-5 mt-1">
-          Popularity :
-          <span className="text-green-500 font-bold">{popularity}</span>
-        </p> */}
-        <p className="text-gray-600 text-sm leading-5 mt-1">
-          {/* Rating :
-          <span className="text-red-500 font-bold">{vote_average}/10</span> */}
+        <p className="text-gray-600 md:hidden lg:block text-sm leading-5 mt-1 ">
           {`${overview.slice(0, 80)}....`}
+        </p>
+
+        <p className="text-gray-600 text-sm leading-5 mt-1 hidden md:block lg:hidden ">
+          {`${overview}`}
         </p>
       </div>
     </div>
