@@ -36,7 +36,7 @@ const Genres = () => {
   const randomMovieData = data?.results[randomMovieIndex];
 
   return (
-    <div className=" flex flex-col justify-center items-center px-5 py-6 relative">
+    <div className=" flex flex-col justify-center items-center px-5 py-6 relative min-h-screen">
       <Link href="/">
         {" "}
         <div className="absolute top-7 left-7 h-[30px] w-[30px] md:h-[50px] md:w-[50px] bg-white hover:bg-slate-300 flex justify-center items-center">
@@ -50,17 +50,19 @@ const Genres = () => {
 
       {randomMovieData && <HeadBanner {...randomMovieData} />}
 
-      <div className="flex justify-center items-center w-full sm:px-5  ">
+      <div className="flex justify-center items-center w-full sm:px-5 min-h-screen  ">
         {isLoading ? (
-          <ProgressBar
-            height="80"
-            width="80"
-            ariaLabel="progress-bar-loading"
-            wrapperStyle={{}}
-            wrapperClass="progress-bar-wrapper"
-            borderColor="#F4442E"
-            barColor="#51E5FF"
-          />
+          <div className="flex justify-center items-center ">
+            <ProgressBar
+              height="80"
+              width="80"
+              ariaLabel="progress-bar-loading"
+              wrapperStyle={{}}
+              wrapperClass="progress-bar-wrapper"
+              borderColor="#F4442E"
+              barColor="#51E5FF"
+            />
+          </div>
         ) : (
           <div className=" grid grid-cols-1 gap-y-3 sm:grid-cols-2  lg:grid-cols-4 xl:grid-cols-5  w-full  md:gap-5 my-7">
             {data?.results?.map((val, idx) => (

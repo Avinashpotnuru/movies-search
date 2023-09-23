@@ -11,6 +11,7 @@ import MoviesCard from "../MoviesCard";
 import { useGetFavoriteMoviesQuery } from "@/store/api/restApis";
 import Link from "next/link";
 import { GrHomeRounded } from "react-icons/gr";
+import { ProgressBar } from "react-loader-spinner";
 
 const Favorites = () => {
   const componentEle = useRef();
@@ -18,7 +19,7 @@ const Favorites = () => {
   // console.log(componentEle.current);
   const path = usePathname();
 
-  const { data } = useGetFavoriteMoviesQuery();
+  const { data, isLoading } = useGetFavoriteMoviesQuery();
 
   // console.log(data);
 
@@ -31,10 +32,9 @@ const Favorites = () => {
   return (
     <div
       ref={componentEle}
-      className="flex flex-col justify-start items-center h-screen relative"
+      className="flex flex-col justify-start items-center  relative"
     >
       <Link href="/">
-        {" "}
         <div className="absolute top-7 left-7 h-[30px] w-[30px] md:h-[50px] md:w-[50px] bg-white hover:bg-slate-300 flex justify-center items-center">
           <GrHomeRounded />
         </div>
@@ -44,22 +44,38 @@ const Favorites = () => {
         Favorites Movies
       </h1>
 
-      {data?.results.length ? (
-        <div className="grid grid-cols-1 gap-y-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5  w-full  md:gap-5 my-7">
-          {data?.results.map((val, idx) => (
-            <MoviesCard
-              addFav={() => {}}
-              delFav={delFav}
-              path={path}
-              key={idx}
-              {...val}
-            />
-          ))}
+      {isLoading ? (
+        <div className="flex justify-center items-center h-[80vh]">
+          <ProgressBar
+            height="80"
+            width="80"
+            ariaLabel="progress-bar-loading"
+            wrapperStyle={{}}
+            wrapperClass="progress-bar-wrapper"
+            borderColor="#F4442E"
+            barColor="#51E5FF"
+          />
         </div>
       ) : (
-        <h1 className="text-white text-2xl text-center h-1/2 mt-28  font-semibold">
-          No movies in Favorite
-        </h1>
+        <>
+          {data?.results.length ? (
+            <div className=" grid grid-cols-1 gap-y-3 sm:grid-cols-2  sm:gap-3 lg:grid-cols-4 xl:grid-cols-5  w-full  md:gap-4 my-7 px-5 lg:px-10">
+              {data?.results.map((val, idx) => (
+                <MoviesCard
+                  addFav={() => {}}
+                  delFav={delFav}
+                  path={path}
+                  key={idx}
+                  {...val}
+                />
+              ))}
+            </div>
+          ) : (
+            <h1 className="text-white text-2xl text-center h-1/2 mt-28  font-semibold">
+              No movies in Favorite
+            </h1>
+          )}
+        </>
       )}
     </div>
   );

@@ -19,9 +19,11 @@ import {
   useGetPersonDetailsQuery,
   useGetPersonImagesQuery,
   useGetHeroMoviesQuery,
+  useGetPersonSocialNetworkAccountsQuery,
 } from "@/store/api/restApis";
 import Link from "next/link";
 import { GrHomeRounded } from "react-icons/gr";
+import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
 
 const CastDetails = () => {
   const [showDetails, setShowDetails] = useState(false);
@@ -35,12 +37,18 @@ const CastDetails = () => {
 
   const { data: heroMovies } = useGetHeroMoviesQuery({ id });
 
+  const { data: socialMedia } = useGetPersonSocialNetworkAccountsQuery({ id });
+
   const images = imagesData?.profiles;
 
+  const faceBook = socialMedia?.facebook_id;
+  const twitter = socialMedia?.twitter_id;
+  const instagram = socialMedia?.instagram_id;
+
   return (
-    <div className=" flex-col justify-center items-center mx-auto h-screen w-full relative  ">
+    <div className=" flex-col justify-center items-center mx-auto min-h-screen w-full relative  ">
       {isLoading ? (
-        <div className="flex justify-center items-center h-1/2">
+        <div className="flex justify-center items-center h-screen">
           <Puff
             height="80"
             width="80"
@@ -54,7 +62,7 @@ const CastDetails = () => {
         </div>
       ) : (
         <>
-          <div className="w-full mx-auto   flex flex-col justify-center items-center md:flex-row md:justify-center md:items-center py-7 relative">
+          <div className="w-full mx-auto   flex flex-col justify-center items-center md:flex-row md:justify-center md:items-center py-7 lg:py-10 relative">
             <Link href="/">
               {" "}
               <div className="absolute top-7 left-7 h-[30px] w-[30px] md:h-[50px] md:w-[50px] bg-white hover:bg-slate-300 flex justify-center items-center">
@@ -62,7 +70,7 @@ const CastDetails = () => {
               </div>
             </Link>
             <div className="md:flex justify-center items-center pt-10  ">
-              <div className="md:w-[40%]">
+              <div className="md:w-[40%] ">
                 <Image
                   height={500}
                   width={500}
@@ -76,6 +84,31 @@ const CastDetails = () => {
                 />
               </div>
               <div className="text-white space-y-3 px-5 font-bold lg:px-10 md:w-[60%] ">
+                <div className="flex items-center space-x-5 my-4">
+                  {instagram && (
+                    <a
+                      href={`https://www.instagram.com/${instagram}/`}
+                      target="_blank"
+                    >
+                      <BsInstagram size={34} />
+                    </a>
+                  )}
+
+                  {faceBook && (
+                    <a
+                      href={`https://www.facebook.com/${faceBook}`}
+                      target="_blank"
+                    >
+                      <BsFacebook size={34} />
+                    </a>
+                  )}
+
+                  {twitter && (
+                    <a href={`https://twitter.com/${twitter}`} target="_blank">
+                      <BsTwitter size={34} />
+                    </a>
+                  )}
+                </div>
                 <h1>
                   Name:{" "}
                   <span className="text-xl lg:text-3xl font-normal">

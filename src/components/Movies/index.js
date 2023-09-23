@@ -7,13 +7,17 @@ import { useSelector } from "react-redux";
 
 import { ProgressBar } from "react-loader-spinner";
 
-import { useGetMoviesQuery } from "@/store/api/restApis";
+import {
+  useGetMoviesQuery,
+  useGetTrendingMoviesQuery,
+} from "@/store/api/restApis";
 
 //import components
 
 import MoviesCard from "../MoviesCard";
 import Pagination from "../Pagination";
 import HeroBanner from "../HeroBanner";
+import SimilarMovieCard from "../SimilarMovieCard";
 
 export const tabs = [
   { title: "Now Playing", tab: "now_playing" },
@@ -27,6 +31,7 @@ const Movies = () => {
   const [tab, setTab] = useState("now_playing");
   const [title, setTitle] = useState("Now Playing");
   const [favorite, setFavorite] = useState([]);
+  const [trending, setTrending] = useState("day");
 
   const handleDropdownChange = (event) => {
     setTab(event.target.value);
@@ -36,6 +41,8 @@ const Movies = () => {
   const pageId = useSelector((state) => state.tabsSlice.tabs);
 
   const { data, isLoading } = useGetMoviesQuery({ tab, pageId });
+
+  const { data: trendingMovies } = useGetTrendingMoviesQuery({ trending });
 
   const moviesData = data?.results;
 
@@ -60,7 +67,44 @@ const Movies = () => {
       <h1 className="text-2xl sm:text-4xl text-white font-semibold mb-3 ">
         Movies
       </h1>
-      <div className="space-x-3  hidden   sm:flex justify-around items-center  flex-wrap">
+
+      <div className="flex flex-col justify-center sm:justify-start sm:flex-row sm:space-x-14 sm:w-full ">
+        <h1 className="text-white font-semibold text-center text-2xl mb-4 sm:mb-0 sm:ml-7">
+          Trending
+        </h1>
+        <div className="space-x-3 rounded-[20px]   sm:flex justify-around items-center border-[1px] border-white  flex-wrap">
+          <button
+            onClick={() => setTrending("day")}
+            className={`rounded-[20px] p-2 hover:shadow-2xl text-white px-4  ${
+              trending == "day"
+                ? "bg-gradient-to-r from-purple-800 via-violet-900 to-purple-800 border-red-100  "
+                : ""
+            } `}
+          >
+            Today
+          </button>
+          <button
+            onClick={() => setTrending("week")}
+            className={`rounded-[20px] p-2 hover:shadow-2xl text-white px-4  ${
+              trending == "week"
+                ? "bg-gradient-to-r from-purple-800 via-violet-900 to-purple-800 border-red-100  "
+                : ""
+            } `}
+          >
+            This week
+          </button>
+        </div>
+      </div>
+
+      <div className="flex flex-col  overflow-x-auto w-full p-3">
+        <div className="flex  space-x-4  ">
+          {trendingMovies?.results?.map((e, idx) => (
+            <SimilarMovieCard key={idx} {...e} />
+          ))}
+        </div>
+      </div>
+
+      <div className="space-x-3 rounded-[20px] hidden   sm:flex justify-around items-center border-[1px] border-white  flex-wrap">
         {tabs.map((val, idx) => (
           <button
             onClick={() => {
@@ -68,8 +112,10 @@ const Movies = () => {
               setTitle(val.title);
               //   dispatch(tabsHandler(val));
             }}
-            className={` my-3 p-2 hover:shadow-2xl text-white   ${
-              tab == val.tab ? "border-b border-red-100 pb-2 font-bold " : ""
+            className={`rounded-[20px] p-2 hover:shadow-2xl text-white px-4  ${
+              tab == val.tab
+                ? "bg-gradient-to-r from-purple-800 via-violet-900 to-purple-800 border-red-100  "
+                : ""
             } `}
             key={idx}
           >
@@ -77,6 +123,7 @@ const Movies = () => {
           </button>
         ))}
       </div>
+
       <select
         className="border sm:hidden rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={tab}

@@ -20,7 +20,7 @@ const iconVariants = {
 
 const Footer = () => {
   return (
-    <div className="bg-[#061820] w-full text-white py-5 ">
+    <div className="bg-[#475569] w-full text-white py-5 ">
       <div className="sm:w-[80%] md:w-[70%] lg:w-[30%] sm:mx-auto">
         <div className="flex justify-around items-center py-5 ">
           <a href="https://github.com/Avinashpotnuru" target="_blank">

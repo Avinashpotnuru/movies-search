@@ -42,7 +42,7 @@ const restApi = createApi({
 
     getMovieFullDetailsById: builder.query({
       query: (data) =>
-        `movie/${data.id}?append_to_response=credits,similar,videos`,
+        `movie/${data.id}?append_to_response=credits,similar,videos,watch/providers `,
       providesTags: ["Movies"],
     }),
 
@@ -104,6 +104,14 @@ const restApi = createApi({
       query: (data) => `movie/upcoming`,
       providesTags: ["Movies"],
     }),
+    getTrendingMovies: builder.query({
+      query: (data) => `trending/movie/${data?.trending}`,
+      providesTags: ["Movies"],
+    }),
+    getPersonSocialNetworkAccounts: builder.query({
+      query: (data) => `person/${data?.id}/external_ids`,
+      providesTags: ["Movies"],
+    }),
   }),
 });
 
@@ -126,6 +134,8 @@ export const {
   useGetSpecialMoviesQuery,
   useGetUpComingMoviesQuery,
   useGetMovieFullDetailsByIdQuery,
+  useGetTrendingMoviesQuery,
+  useGetPersonSocialNetworkAccountsQuery,
 } = restApi;
 
 export default restApi;

@@ -57,15 +57,17 @@ const Specials = () => {
 
       <div className="flex justify-center items-center w-full sm:px-5  ">
         {isLoading ? (
-          <ProgressBar
-            height="80"
-            width="80"
-            ariaLabel="progress-bar-loading"
-            wrapperStyle={{}}
-            wrapperClass="progress-bar-wrapper"
-            borderColor="#F4442E"
-            barColor="#51E5FF"
-          />
+          <div className="flex justify-center items-center h-screen">
+            <ProgressBar
+              height="80"
+              width="80"
+              ariaLabel="progress-bar-loading"
+              wrapperStyle={{}}
+              wrapperClass="progress-bar-wrapper"
+              borderColor="#F4442E"
+              barColor="#51E5FF"
+            />
+          </div>
         ) : (
           <div className=" grid grid-cols-1 gap-y-3 sm:grid-cols-2   lg:grid-cols-4 xl:grid-cols-5   w-full  md:gap-5 my-7">
             {data?.results?.map((val, idx) => (

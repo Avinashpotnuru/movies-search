@@ -124,12 +124,12 @@ const Navbar = () => {
 
   return (
     <div className=" bg-slate-600 w-full fixed z-30 ">
-      <div className=" bg-slate-600 px-5 py-4 flex justify-between items-center fixed top-0 left-0 right-0 w-full z-30  ">
+      <div className=" bg-slate-600 px-5 py-3 flex justify-between items-center fixed top-0 left-0 right-0 w-full z-30  ">
         <Link href={"/"}>
           <Image
             height={100}
             width={100}
-            className="h-[50px] w-[50px] rounded-full"
+            className="h-[40px] w-[40px] rounded-full"
             src="/movieszone.png"
             alt="logo"
           />

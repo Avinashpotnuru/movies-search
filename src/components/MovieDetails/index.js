@@ -72,7 +72,7 @@ const MovieDetails = () => {
   // console.log(trailer);
 
   return isLoading ? (
-    <div className="flex justify-center items-center h-[50vh]">
+    <div className="flex justify-center items-center h-screen">
       <ProgressBar
         height="80"
         width="80"
@@ -137,9 +137,14 @@ const MovieDetails = () => {
           </div>
           <div className="  text-blue-900  md:flex md:flex-col md:justify-around  px-4  p-3 md:px-8 lg:px-14 xl:px-24 ">
             <div className="flex justify-between items-center my-2 sm:my-4">
-              <h1 className="text-white text-2xl font-extrabold ">
-                {data?.title}
-              </h1>
+              <div>
+                <h1 className="text-white text-2xl font-extrabold ">
+                  {data?.title}
+                </h1>
+                <h1 className="text-white text-lg font-semibold ">
+                  {data?.tagline}
+                </h1>
+              </div>
 
               <div
                 onClick={() => {
@@ -187,6 +192,12 @@ const MovieDetails = () => {
                   </span>{" "}
                   {data?.release_date}
                 </h1>
+                <h1 className="text-green-500 font-bold">
+                  <span className=" text-white font-bold text-base">
+                    Status :
+                  </span>{" "}
+                  {data?.status}
+                </h1>
               </div>
               <div className="h-[60px] w-[60px]">
                 <CircleRating rating={data?.vote_average?.toFixed(1)} />
@@ -219,7 +230,7 @@ const MovieDetails = () => {
           </div>
         </div>
       </div>
-      <div className="sm:px-7 lg:px-10 xl:px-20">
+      <div className="sm:px-7 lg:px-10 xl:px-20 py-6">
         {videos?.length && (
           <>
             <h1 className=" font-bold text-white my-3 text-2xl  text-center">
