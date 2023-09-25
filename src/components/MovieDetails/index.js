@@ -84,7 +84,7 @@ const MovieDetails = () => {
       />
     </div>
   ) : (
-    <div className="w-full pt-16  md:pt-0 relative ">
+    <div className="w-full pt-16  md:pt-0 relative  ">
       <Link href="/">
         {" "}
         <div className="absolute top-7 left-7  z-10 h-[30px] w-[30px] md:h-[50px] md:w-[50px] bg-white hover:bg-slate-300 flex justify-center items-center">
@@ -94,9 +94,9 @@ const MovieDetails = () => {
       <div
         className={`w-full md:h-[60vh]  lg:h-[80vh]   ${
           data.backdrop_path && ""
-        }    rounded-md    flex justify-center items-center  relative   `}
+        }    rounded-md    flex justify-center items-center  relative`}
       >
-        <div className="opacity-layer1 h-[20px] lg:h-[100px]"></div>
+        <div className="opacity-layer1 h-[20px] md:h-[1px] lg:h-[100px]"></div>
         <Image
           src={`${
             data.backdrop_path
@@ -118,7 +118,7 @@ const MovieDetails = () => {
                   ? `${imagePath}${data.poster_path}`
                   : "/noimage.png"
               }`}
-              className="w-[300px] h-[380px]  md:h-full  sm:hidden"
+              className="w-[300px] h-[380px]  md:min-h-full  sm:hidden"
               alt="image"
             />
             <div className="hidden w-full sm:flex  md:flex justify-center items-center  ">
@@ -130,7 +130,7 @@ const MovieDetails = () => {
                     ? `${imagePath}${data.poster_path}`
                     : "/noimage.png"
                 }`}
-                className="w-[300px] h-[450px] md:w-[550px] lg:min-h-[500px] lg:min-w-[410px]   mb-6 "
+                className="w-[300px] h-[450px]  md:min-w-[380px]  lg:min-h-[500px] lg:min-w-[410px]   mb-6 "
                 alt="image"
               />
             </div>
