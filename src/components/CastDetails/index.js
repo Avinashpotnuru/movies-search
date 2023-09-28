@@ -15,12 +15,7 @@ import { Puff } from "react-loader-spinner";
 import SimilarMovieCard from "../SimilarMovieCard";
 
 //import from store
-import {
-  useGetPersonDetailsQuery,
-  useGetPersonImagesQuery,
-  useGetHeroMoviesQuery,
-  useGetPersonSocialNetworkAccountsQuery,
-} from "@/store/api/restApis";
+import { useGetCastFullDetailsQuery } from "@/store/api/restApis";
 import Link from "next/link";
 import { GrHomeRounded } from "react-icons/gr";
 import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
@@ -31,19 +26,18 @@ const CastDetails = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data, isLoading } = useGetPersonDetailsQuery({ id });
+  const { data, isLoading } = useGetCastFullDetailsQuery({ id });
 
-  const { data: imagesData } = useGetPersonImagesQuery({ id });
+  console.log(data);
 
-  const { data: heroMovies } = useGetHeroMoviesQuery({ id });
+  const images = data?.images?.profiles;
 
-  const { data: socialMedia } = useGetPersonSocialNetworkAccountsQuery({ id });
+  const faceBook = data?.external_ids?.facebook_id;
+  const twitter = data?.external_ids?.twitter_id;
+  const instagram = data?.external_ids?.instagram_id;
+  const heroMovies = data?.combined_credits?.cast;
 
-  const images = imagesData?.profiles;
-
-  const faceBook = socialMedia?.facebook_id;
-  const twitter = socialMedia?.twitter_id;
-  const instagram = socialMedia?.instagram_id;
+  console.log(heroMovies);
 
   return (
     <div className=" flex-col justify-center items-center mx-auto min-h-screen w-full relative  ">
@@ -152,14 +146,14 @@ const CastDetails = () => {
             </div>
           </div>
           <div className=" sm:px-6 md:px-10 lg:px-20 xl:px-24">
-            {heroMovies?.cast && (
+            {heroMovies && (
               <>
                 <h1 className="text-white text-2xl font-semibold my-3 mx-4">
                   Movies of {data?.name}
                 </h1>
                 <div className="flex flex-col  overflow-x-auto w-full p-3">
                   <div className="flex  space-x-4  ">
-                    {heroMovies?.cast.map((e, idx) => (
+                    {heroMovies?.map((e, idx) => (
                       <SimilarMovieCard key={idx} {...e} />
                     ))}
                   </div>

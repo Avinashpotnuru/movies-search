@@ -24,11 +24,9 @@ function MoviesCard({
   title,
   poster_path,
   id,
-  release_date,
-  popularity,
+
   vote_average,
-  addFav,
-  delFav,
+
   overview,
 }) {
   const rate = Math.floor(vote_average);

@@ -2,7 +2,7 @@
 import { usePathname } from "next/navigation";
 
 //react imports
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { ProgressBar } from "react-loader-spinner";
@@ -45,21 +45,6 @@ const Movies = () => {
   const { data: trendingMovies } = useGetTrendingMoviesQuery({ trending });
 
   const moviesData = data?.results;
-
-  const saveToLocalStorage = (items) => {
-    localStorage.setItem("favData", JSON.stringify(items));
-  };
-
-  const addFav = (e) => {
-    const filterId = moviesData.find((item) => item.id === e);
-    setFavorite([...favorite, filterId]);
-    saveToLocalStorage(favorite);
-  };
-
-  const delFav = (e) => {
-    const delMovie = favorite.filter((item) => item.id !== e);
-    saveToLocalStorage(delMovie);
-  };
 
   return (
     <div className="flex flex-col justify-center items-center space-y-7 min-h-screen w-full   ">
@@ -153,13 +138,7 @@ const Movies = () => {
         ) : (
           <div className=" grid grid-cols-1 gap-y-3 sm:grid-cols-2  sm:gap-3 lg:grid-cols-4 xl:grid-cols-5  w-full  md:gap-4 my-7">
             {moviesData?.map((val, idx) => (
-              <MoviesCard
-                path={path}
-                delFav={delFav}
-                addFav={addFav}
-                key={idx}
-                {...val}
-              />
+              <MoviesCard path={path} key={idx} {...val} />
             ))}
           </div>
         )}

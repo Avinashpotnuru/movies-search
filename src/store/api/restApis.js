@@ -46,42 +46,16 @@ const restApi = createApi({
       providesTags: ["Movies"],
     }),
 
-    getMovieDetailsCast: builder.query({
-      query: (data) => `movie/${data.id}/credits`,
-      providesTags: ["Movies"],
-    }),
-    getMovieVideos: builder.query({
-      query: (data) => `movie/${data.id}/videos`,
-      providesTags: ["Movies"],
-    }),
     getSearchMovies: builder.query({
       query: (data) => `search/movie?query=${data.searchInput}`,
       providesTags: ["Movies"],
     }),
-    getSimilarMovies: builder.query({
-      query: (data) => `movie/${data.id}/similar`,
-      providesTags: ["Movies"],
-    }),
-    getMovieReview: builder.query({
-      query: (data) => `movie/${data.id}/watch/providers`,
-      providesTags: ["Movies"],
-    }),
+
     getMovieImages: builder.query({
       query: (data) => `movie/${data.id}/images`,
       providesTags: ["Movies"],
     }),
-    getPersonDetails: builder.query({
-      query: (data) => `person/${data.id}`,
-      providesTags: ["Movies"],
-    }),
-    getPersonImages: builder.query({
-      query: (data) => `person/${data.id}/images`,
-      providesTags: ["Movies"],
-    }),
-    getHeroMovies: builder.query({
-      query: (data) => `person/${data.id}/combined_credits`,
-      providesTags: ["Movies"],
-    }),
+
     getFavoriteMovies: builder.query({
       query: (data) => `account/20236627/favorite/movies`,
       providesTags: ["Movies"],
@@ -108,8 +82,10 @@ const restApi = createApi({
       query: (data) => `trending/movie/${data?.trending}`,
       providesTags: ["Movies"],
     }),
-    getPersonSocialNetworkAccounts: builder.query({
-      query: (data) => `person/${data?.id}/external_ids`,
+
+    getCastFullDetails: builder.query({
+      query: (data) =>
+        `person/${data?.id}?append_to_response=combined_credits,external_ids,images`,
       providesTags: ["Movies"],
     }),
   }),
@@ -119,23 +95,16 @@ export const {
   useAddFavoritesMutation,
   useGetMoviesQuery,
   useGetMovieByIdQuery,
-  useGetMovieDetailsCastQuery,
-  useGetMovieVideosQuery,
   useGetSearchMoviesQuery,
-  useGetSimilarMoviesQuery,
-  useGetMovieReviewQuery,
-  useGetPersonDetailsQuery,
-  useGetPersonImagesQuery,
   useGetMovieImagesQuery,
   useGetFavoriteMoviesQuery,
-  useGetHeroMoviesQuery,
   useGetGenresQuery,
   useGetGenresMoviesQuery,
   useGetSpecialMoviesQuery,
   useGetUpComingMoviesQuery,
   useGetMovieFullDetailsByIdQuery,
   useGetTrendingMoviesQuery,
-  useGetPersonSocialNetworkAccountsQuery,
+  useGetCastFullDetailsQuery,
 } = restApi;
 
 export default restApi;

@@ -25,14 +25,10 @@ const Favorites = () => {
 
   const delFav = (e) => {};
 
-  // useEffect(() => {
-  //   window.location.reload();
-  // }, []);
-
   return (
     <div
       ref={componentEle}
-      className="flex flex-col justify-start items-center  relative"
+      className="flex flex-col justify-start items-center  relative min-h-[70vh]"
     >
       <Link href="/">
         <div className="absolute top-7 left-7 h-[30px] w-[30px] md:h-[50px] md:w-[50px] bg-white hover:bg-slate-300 flex justify-center items-center">
@@ -71,7 +67,7 @@ const Favorites = () => {
               ))}
             </div>
           ) : (
-            <h1 className="text-white text-2xl text-center h-1/2 mt-28  font-semibold">
+            <h1 className="text-red-500 text-2xl text-center h-1/2 mt-28  font-semibold">
               No movies in Favorite
             </h1>
           )}
