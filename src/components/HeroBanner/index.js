@@ -39,7 +39,7 @@ const HeroBanner = ({ pageId }) => {
         />
       )}
       <div className="absolute">
-        <h1 className="text-white text-3xl md:text-6xl font-extrabold  leading-tight text-center mb-5 md:mb-10 ">
+        <h1 className="text-white text-3xl md:text-5xl font-bold  leading-tight text-center mb-5 md:mb-10 ">
           Welcome
         </h1>
         <h1 className="text-white tracking-wide text-xl md:text-3xl font-semibold  text-center px-5 ">
