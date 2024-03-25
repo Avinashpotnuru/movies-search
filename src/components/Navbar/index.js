@@ -37,8 +37,6 @@ const Navbar = () => {
 
   const menuRef = useRef(null);
 
-  const dropDownCardRef = useRef(null);
-
   const [dropDown, setDropDown] = useState(false);
 
   const [splDropDown, setSplDropDown] = useState(false);
@@ -65,52 +63,6 @@ const Navbar = () => {
     // setInput("");
     dispatch(searchInputHandler(""));
   };
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      // console.log(event);
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setToggle(false);
-        // setInput("");
-        dispatch(searchInputHandler(""));
-      }
-
-      if (
-        dropDownCardRef.current &&
-        !dropDownCardRef.current.contains(event.target)
-      ) {
-        setDropDownCard(false);
-      }
-    }
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
-  // console.log(dropDownCardRef.current);
-  // console.log(menuRef.current);
-
-  useEffect(() => {
-    function handleDropClickOutside(event) {
-      // console.log(event);
-
-      if (
-        dropDownCardRef.current &&
-        !dropDownCardRef.current.contains(event.target)
-      ) {
-        setDropDownCard(false);
-      }
-    }
-
-    document.addEventListener("click", handleDropClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleDropClickOutside);
-    };
-  }, []);
 
   const clearInput = () => {
     // setInput("");
@@ -160,14 +112,9 @@ const Navbar = () => {
                 Categories
               </h1>
               {dropDownCard && (
-                <div
-                  // ref={dropDownCardRef}
-                  // onClick={() => setDropDownCard()}
-                  className="bg-white w-[500px] rounded-lg absolute top-12 p-4 hidden  md:grid grid-cols-3 gap-5 "
-                >
+                <div className="bg-white w-[500px] rounded-lg absolute top-12 p-4 hidden  md:grid grid-cols-3 gap-5 ">
                   {moviesList?.genres?.map((item, idx) => (
                     <Link
-                      // ref={dropDownCardRef}
                       className="hover:bg-slate-100"
                       onClick={() => {
                         // setOpen(false);
