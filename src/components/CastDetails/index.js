@@ -37,7 +37,6 @@ const CastDetails = () => {
   const instagram = data?.external_ids?.instagram_id;
   const heroMovies = data?.combined_credits?.cast;
 
-  console.log(heroMovies);
 
   return (
     <div className=" flex-col justify-center items-center mx-auto min-h-screen w-full relative  ">

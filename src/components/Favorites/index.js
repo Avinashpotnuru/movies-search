@@ -16,12 +16,9 @@ import { ProgressBar } from "react-loader-spinner";
 const Favorites = () => {
   const componentEle = useRef();
 
-  // console.log(componentEle.current);
   const path = usePathname();
 
   const { data, isLoading } = useGetFavoriteMoviesQuery();
-
-  // console.log(data);
 
   const delFav = (e) => {};
 

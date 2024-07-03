@@ -15,7 +15,6 @@ const HeroBanner = ({ pageId }) => {
 
   const tab = tabs[randomTab]?.tab;
 
-  // console.log(tab);
 
   const { data, isLoading } = useGetMoviesQuery({
     tab: tab ? tab : "upcoming",

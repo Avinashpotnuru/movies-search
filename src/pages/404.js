@@ -4,19 +4,20 @@ import React from "react";
 
 const NotFound = () => {
   return (
-    <div className="relative">
+    <div className="pt-[65px] h-[80vh] md:h-[80vh] flex flex-col space-y-5 justify-center items-center ">
       <Image
         height={400}
         width={400}
         src={"/404.webp"}
-        className="w-full h-[500px] sm:h-auto object-cover"
+        className=" object-cover"
         alt="404"
       />
       <Link href="/">
-        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg absolute top-7 left-1/2 transform -translate-x-1/2 w-auto">
+        <button className="px-6 py-3 bg-white text-blue-500 font-bold rounded-lg shadow-md hover:bg-blue-100 hover:shadow-lg transition duration-300 transform  focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50">
           Go to Home Page
         </button>
       </Link>
+      
     </div>
   );
 };

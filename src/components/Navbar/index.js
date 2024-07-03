@@ -190,7 +190,6 @@ const Navbar = () => {
                 type="text"
                 placeholder={"Search Movie Name"}
                 onChange={(e) => {
-                  // setInput(e.target.value);
                   setToggle(true);
                   dispatch(searchInputHandler(e.target.value));
                 }}
@@ -198,24 +197,27 @@ const Navbar = () => {
                 className="py-2 px-4 border border-gray-300  focus:outline-none focus:ring focus:border-blue-300"
               />
               {tabToggle && (
-                <div
-                  ref={menuRef}
-                  className="bg-gray-800    absolute w-full h-[200px] overflow-hidden overflow-y-auto -bottom-48"
-                >
-                  {searchData.length ? (
-                    searchData.map((e, idx) => (
-                      <SearchTabComponent
-                        tabHandler={() => setToggle()}
-                        key={idx}
-                        {...e}
-                      />
-                    ))
-                  ) : (
-                    <h1 className="text-red-500 text-center mt-[80px] my-auto">
-                      no results{" "}
-                    </h1>
-                  )}
-                </div>
+                  <OutsideClickHandlerWrapper
+                    onOutsideClick={() => setToggle(false)}
+                  >
+                    <div
+                      className="bg-gray-800 md:left-0   absolute w-[90%] md:w-full h-[200px] overflow-hidden overflow-y-auto -bottom-52"
+                    >
+                      {searchData.length ? (
+                        searchData.map((e, idx) => (
+                          <SearchTabComponent
+                            tabHandler={() => setToggle()}
+                            key={idx}
+                            {...e}
+                          />
+                        ))
+                      ) : (
+                        <h1 className="text-red-500 text-center mt-[80px] my-auto">
+                          no results{" "}
+                        </h1>
+                      )}
+                    </div>
+                  </OutsideClickHandlerWrapper>
               )}
             </div>
             <Link href={`/search-movies/${searchInput}`}>
@@ -260,7 +262,7 @@ const Navbar = () => {
                 {tabToggle && (
                   <div
                     ref={menuRef}
-                    className="bg-gray-800    absolute w-full h-[200px] overflow-hidden overflow-y-auto -bottom-48"
+                    className="bg-gray-800    absolute w-[90%] h-[200px] overflow-hidden overflow-y-auto -bottom-52"
                   >
                     {searchData.length ? (
                       searchData.map((e, idx) => (

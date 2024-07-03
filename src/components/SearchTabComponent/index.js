@@ -26,9 +26,9 @@ const SearchTabComponent = ({
           dispatch(searchInputHandler(""));
           dispatch(closeNav());
         }}
-        className="w-full  flex justify-between items-center bg-gray-700 py-2 px-3 min-h-10 border-t-[1px]"
+        className="w-full  flex space-x-6 items-center bg-gray-700 py-2 px-3 min-h-10 border-t-[1px]"
       >
-        <div className="w-[30%]">
+        <div className="">
           <Image
             height={500}
             width={500}
@@ -40,7 +40,7 @@ const SearchTabComponent = ({
           />
         </div>
 
-        <h1 className="text-center text-[10px] font-bold text-white w-[70%]">
+        <h1 className="text-[10px] font-bold text-white">
           {title}
         </h1>
       </div>
