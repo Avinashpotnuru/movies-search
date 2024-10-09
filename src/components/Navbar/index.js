@@ -25,6 +25,7 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 //import components
 import SearchTabComponent from "../SearchTabComponent";
 import Image from "next/image";
+import useDebounce from "../../hooks/useDebounce"; 
 
 export const specials = [
   { name: "Hindi movies", page: "hindi", code: "hi" },
@@ -51,6 +52,16 @@ const Navbar = () => {
   const path = usePathname();
 
   const searchInput = useSelector((state) => state.tabsSlice.searchInput);
+   const debouncedSearchInput = useDebounce(searchInput, 1000);
+
+   useEffect(() => {
+     if (debouncedSearchInput) {
+       setToggle(true);
+       dispatch(searchInputHandler(debouncedSearchInput));
+     } else {
+       setToggle(false);
+     }
+   }, [debouncedSearchInput, dispatch]);
 
   const open = useSelector((state) => state.tabsSlice.navToggle);
 
@@ -70,7 +81,9 @@ const Navbar = () => {
     // setInput("");
   };
 
-  const { data } = useGetSearchMoviesQuery({ searchInput });
+  const { data } = useGetSearchMoviesQuery({
+    searchInput: debouncedSearchInput,
+  });
 
   const searchData = data?.results;
 

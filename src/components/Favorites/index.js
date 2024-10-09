@@ -1,5 +1,5 @@
 //hooks
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
 //next imports
 import { usePathname } from "next/navigation";

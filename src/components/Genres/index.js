@@ -36,7 +36,6 @@ const Genres = () => {
   return (
     <div className=" flex flex-col justify-center items-center px-5 py-6 relative min-h-screen">
       <Link href="/">
-        {" "}
         <div className="absolute top-7 left-7 h-[30px] w-[30px] md:h-[50px] md:w-[50px] bg-white hover:bg-slate-300 flex justify-center items-center">
           <GrHomeRounded />
         </div>

@@ -3,8 +3,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASEURL;
-const API_KEY =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZjI1NjI4MzQ5ZDEyYTM2NjBlOGU2MzEyOGY3YWFhNCIsInN1YiI6IjY0YzhlMzc1MWZhMWM4MDEwZjRkY2M5MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GnxYB_a56IRwIqbctVsCAFOnuMa3aMrE01vLubawd-o";
+const API_KEY = process.env.NEXT_PUBLIC_BACKEND_BASEURL_API_KEY;
 
 const restApi = createApi({
   reducerPath: "restApi",
@@ -61,7 +60,7 @@ const restApi = createApi({
       providesTags: ["Movies"],
     }),
     getGenres: builder.query({
-      query: (data) => `genre/movie/list`,
+      query: () => `genre/movie/list`,
       providesTags: ["Movies"],
     }),
     getGenresMovies: builder.query({
@@ -75,7 +74,7 @@ const restApi = createApi({
       providesTags: ["Movies"],
     }),
     getUpComingMovies: builder.query({
-      query: (data) => `movie/upcoming`,
+      query: () => `movie/upcoming`,
       providesTags: ["Movies"],
     }),
     getTrendingMovies: builder.query({

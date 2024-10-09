@@ -19,8 +19,7 @@ const HeadBanner = ({ backdrop_path, title, overview, id }) => {
         <div className="w-[60%] absolute bottom-5 left-4 z-20">
           <h1 className="text-2xl md:text-3xl font-bold my-3">{title}</h1>
           <p className="text-gray-100  text-base md:text-xl">
-            {" "}
-            {`${overview?.slice(0, 100)} ....`}
+           {overview?.slice(0, 100)} ....
           </p>
         </div>
       </Link>
